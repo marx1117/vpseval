@@ -10,3 +10,7 @@ docs/
 .codebuddy/
 .astro/
 .uploads/
+
+# RAG 生成的中间文件，可随时重新生成
+scripts/articles.json
+scripts/vectors.ndjson

@@ -1,2 +1,20 @@
 name = "vpseval"
 compatibility_date = "2026-06-28"
+pages_build_output_dir = "dist"
+
+# ========== Vectorize — 知识库向量索引 ==========
+# 创建命令: npx wrangler vectorize create vpseval-kb --dimensions=1024 --metric=cosine
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "vpseval-kb"
+
+# ========== D1 — 结构化数据（服务商/评测） ==========
+# 创建命令: npx wrangler d1 create vpseval-db
+[[d1_databases]]
+binding = "DB"
+database_name = "vpseval-db"
+database_id = "a8a80657-9296-4816-8188-a308b109bb77"
+
+# ========== Workers AI — LLM + Embedding ==========
+[ai]
+binding = "AI"

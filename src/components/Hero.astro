@@ -29,7 +29,7 @@ const quickPrompts = [
       </div>
       <div class="p-5 sm:p-6">
         <div id="prompt-list">
-          <div class="flex items-start gap-3 mb-5">
+          <div class="flex items-start gap-3 mb-6">
             <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0">
               <svg class="w-4 h-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
@@ -59,7 +59,7 @@ const quickPrompts = [
             </button>
           </div>
         </div>
-        <div id="ai-result" class="hidden"></div>
+        <div id="ai-result" class="hidden pt-8 pb-4"></div>
       </div>
     </div>
 </section>
@@ -82,7 +82,9 @@ const quickPrompts = [
         AI 推理中...
       </div>`;
       try {
-        const res = await fetch(`http://localhost:4399/api/chat?q=${encodeURIComponent(query)}`);
+        const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        const apiUrl = isLocal ? 'https://vpseval.com/api/chat' : '/api/chat';
+        const res = await fetch(`${apiUrl}?q=${encodeURIComponent(query)}`);
         const data = await res.json();
         if (data.error) {
           resultArea.innerHTML = `<div class="text-sm text-red-500 p-4 rounded-2xl bg-red-50 dark:bg-red-900/20">${data.error}</div><button id="retry-btn" class="mt-3 text-sm text-brand-600 hover:underline font-medium">← 重新提问</button>`;
@@ -92,7 +94,7 @@ const quickPrompts = [
           document.getElementById('retry-btn')?.addEventListener('click', resetDialog);
         }
       } catch {
-        resultArea.innerHTML = `<div class="text-sm text-gray-500 p-4 rounded-2xl bg-gray-50 dark:bg-gray-900">AI 服务未启动。终端运行 <code class="text-brand-600 font-medium">node server.mjs</code></div><button id="retry-btn" class="mt-3 text-sm text-brand-600 hover:underline font-medium">← 重新提问</button>`;
+        resultArea.innerHTML = `<div class="text-sm text-gray-500 p-4 rounded-2xl bg-gray-50 dark:bg-gray-900">AI 服务暂时不可用，请稍后再试</div><button id="retry-btn" class="mt-3 text-sm text-brand-600 hover:underline font-medium">← 重新提问</button>`;
         document.getElementById('retry-btn')?.addEventListener('click', resetDialog);
       }
       loading = false;
