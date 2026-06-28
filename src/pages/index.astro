@@ -1,0 +1,455 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { scenarios, solutionPaths, providers } from '../lib/data.ts';
+import { knowledgeBase } from '../lib/knowledge.ts';
+
+// 精选服务商标识（从 data.ts 拉取真实数据）
+const featuredProviderIds = ['dmit', 'racknerd', 'cloudcone', 'bandwagon', 'hosthatch', 'buyvm'];
+const featuredProviders = providers.filter(p => featuredProviderIds.includes(p.id)).slice(0, 6);
+
+// 知识速查精选
+const featuredKnowledge = knowledgeBase.slice(0, 8);
+
+// 真实统计
+const stats = [
+  { num: '18', label: '家服务商', sub: '精选实测' },
+  { num: '46', label: '篇知识库', sub: '持续更新' },
+  { num: '24', label: '个一键脚本', sub: '开箱即用' },
+  { num: '13', label: '个知识分类', sub: '系统梳理' },
+];
+
+// 快速提问模板
+const quickPrompts = [
+  '电信用户 ¥5/月 推荐哪个 VPS？',
+  '联通宽带 自建代理 怎么搞',
+  '做独立站需要什么配置？',
+  '新买 VPS 第一步该做什么？',
+];
+
+// 场景图标
+const scenarioIcons: any = {
+  shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  globe: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  terminal: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  zap: 'M13 10V3L4 14h7v7l9-11h-7z',
+  download: 'M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4',
+  book: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+};
+
+// 延迟颜色
+function latencyColor(ms: number): string {
+  if (ms < 50) return 'text-brand-600';
+  if (ms < 120) return 'text-yellow-600';
+  if (ms < 200) return 'text-orange-600';
+  return 'text-red-500';
+}
+
+function bestLatency(p: typeof providers[number]): { telecom: number; unicom: number; mobile: number } {
+  let best = { telecom: 999, unicom: 999, mobile: 999 };
+  for (const l of Object.values(p.latency)) {
+    if (l.telecom < best.telecom) best.telecom = l.telecom;
+    if (l.unicom < best.unicom) best.unicom = l.unicom;
+    if (l.mobile < best.mobile) best.mobile = l.mobile;
+  }
+  return best;
+}
+---
+
+<BaseLayout title="机鉴 - VPS 选型与知识库" description="18 家精选 VPS 服务商，三网延迟实测数据，按线路、价格、用途智能推荐方案。">
+  <!-- ========== Hero ========== -->
+  <section class="relative overflow-hidden">
+    <!-- 背景光斑 -->
+    <div class="absolute inset-0 -z-10 pointer-events-none">
+      <div class="absolute top-0 left-1/4 w-[480px] h-[480px] bg-brand-200/40 dark:bg-brand-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute top-40 right-0 w-[360px] h-[360px] bg-brand-100/50 dark:bg-brand-700/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container-page pt-12 sm:pt-16 pb-20">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <!-- 左侧标题 -->
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800/50 mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
+            <span class="text-xs font-medium text-brand-700 dark:text-brand-300">18 家精选服务商数据</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-[1.05] mb-5">
+            选 VPS<br/>
+            不用再<span class="relative inline-block">
+              <span class="relative z-10 text-brand-500">瞎折腾</span>
+              <span class="absolute bottom-1.5 left-0 w-full h-3 bg-brand-200/70 dark:bg-brand-700/40 -z-0 rounded"></span>
+            </span>
+          </h1>
+
+          <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8 max-w-xl">
+          18 家服务商真实数据，按三网延迟、线路类型、性价比整理。<br class="hidden sm:block"/>
+            告诉 AI 你的需求，10 秒给出推荐方案。
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="/compare" class="btn-primary">
+              选购指南
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+            <a href="#ai-section" class="btn-secondary">
+              问 AI 助手
+            </a>
+          </div>
+
+          <!-- 数据栏 -->
+          <div class="grid grid-cols-4 gap-3 mt-10 pt-8 border-t border-gray-100 dark:border-gray-800">
+            {stats.map(s => (
+              <div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tabular-nums">{s.num}</div>
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- 右侧 AI 对话框（紧凑版） -->
+        <div class="lg:col-span-5">
+          <div class="card overflow-hidden">
+            <div class="px-4 py-3 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between bg-gray-50/50 dark:bg-gray-800/30">
+              <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-red-400/60"></span>
+                  <span class="w-2 h-2 rounded-full bg-yellow-400/60"></span>
+                  <span class="w-2 h-2 rounded-full bg-green-400/60"></span>
+                </div>
+                <span class="text-xs font-medium text-gray-500 dark:text-gray-400 ml-2">AI 助手</span>
+              </div>
+              <span class="inline-flex items-center gap-1 text-[10px] text-brand-600 dark:text-brand-400 font-medium">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                在线
+              </span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start gap-2.5 mb-4">
+                <div class="w-7 h-7 rounded-full bg-brand-100 dark:bg-brand-900/40 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-3.5 h-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+                  </svg>
+                </div>
+                <div class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  你好，说说你的需求：<br/>
+                  <span class="text-gray-400 text-xs">线路 / 预算 / 用途 / 运营商</span>
+                </div>
+              </div>
+
+              <div class="space-y-1.5 mb-4">
+                {quickPrompts.map((prompt, idx) => (
+                  <button class="quick-prompt w-full text-left px-3 py-2 rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 text-[13px] text-gray-600 dark:text-gray-300 hover:border-brand-300 dark:hover:border-brand-700 hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all" data-query={prompt}>
+                    <span class="text-gray-400 mr-2 text-[11px] font-mono">{idx + 1}</span>
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  id="ai-input"
+                  placeholder="如：移动宽带 ¥30/月..."
+                  class="flex-1 px-3.5 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none"
+                />
+                <button id="ai-send" class="px-4 py-2.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold transition-colors flex-shrink-0">
+                  提问
+                </button>
+              </div>
+              <div id="ai-result" class="hidden mt-4 pt-4 border-t border-gray-100 dark:border-gray-800"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 场景导航 ========== -->
+  <section class="container-page py-12 sm:py-16">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">按场景选</h2>
+        <p class="text-gray-500 dark:text-gray-400">挑一个最贴近你需求的场景，直接看推荐</p>
+      </div>
+      <a href="/compare" class="hidden sm:inline-flex items-center gap-1 text-sm text-brand-600 dark:text-brand-400 hover:underline font-medium">
+        查看全部
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      {scenarios.slice(0, 6).map(s => {
+        const colorMap: any = {
+          proxy: 'from-brand-100 to-brand-50 dark:from-brand-900/30 dark:to-brand-900/10 text-brand-700 dark:text-brand-300',
+          hosting: 'from-blue-100 to-blue-50 dark:from-blue-900/30 dark:to-blue-900/10 text-blue-700 dark:text-blue-300',
+          dev: 'from-purple-100 to-purple-50 dark:from-purple-900/30 dark:to-purple-900/10 text-purple-700 dark:text-purple-300',
+          gaming: 'from-orange-100 to-orange-50 dark:from-orange-900/30 dark:to-orange-900/10 text-orange-700 dark:text-orange-300',
+          pt: 'from-pink-100 to-pink-50 dark:from-pink-900/30 dark:to-pink-900/10 text-pink-700 dark:text-pink-300',
+          learning: 'from-cyan-100 to-cyan-50 dark:from-cyan-900/30 dark:to-cyan-900/10 text-cyan-700 dark:text-cyan-300',
+        };
+        const colors = colorMap[s.icon] || colorMap.proxy;
+        return (
+          <a href="/compare" class="group relative overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+            <div class={`absolute inset-0 bg-gradient-to-br ${colors} opacity-50 group-hover:opacity-80 transition-opacity -z-0`}></div>
+            <div class="relative">
+              <div class="w-10 h-10 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur flex items-center justify-center mb-3">
+                <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={scenarioIcons[s.icon] || scenarioIcons.shield}/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-gray-900 dark:text-white text-[15px] mb-1">{s.title}</h3>
+              <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">{s.description}</p>
+              <div class="text-[11px] text-gray-400 dark:text-gray-500 mt-2.5 font-medium tabular-nums">{s.providers.length} 家可选</div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- ========== 热门机型 ========== -->
+  <section class="container-page py-12 sm:py-16">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 text-[11px] font-bold mb-2">精选</div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">热门机型速览</h2>
+        <p class="text-gray-500 dark:text-gray-400">从 18 家里挑出 6 个最常被问到的真实配置</p>
+      </div>
+      <a href="/compare" class="hidden sm:inline-flex items-center gap-1 text-sm text-brand-600 dark:text-brand-400 hover:underline font-medium">
+        打开选购指南
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {featuredProviders.map(p => {
+        const lat = bestLatency(p);
+        return (
+          <a href="/compare" class="card p-5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md transition-all group block">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <h3 class="font-bold text-gray-900 dark:text-white text-lg group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">{p.name}</h3>
+                <div class="flex items-center gap-1.5 mt-1">
+                  {p.tags.slice(0, 2).map(tag => (
+                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-2xl font-extrabold text-gray-900 dark:text-white tabular-nums">${p.priceFrom}</div>
+                <div class="text-[10px] text-gray-400 uppercase tracking-wide">/月起</div>
+              </div>
+            </div>
+
+            <div class="text-xs text-gray-500 dark:text-gray-400 mb-3 leading-relaxed">
+              {p.minConfig} · {p.traffic} 流量 · {p.portSpeed}
+            </div>
+
+            <div class="grid grid-cols-3 gap-1.5 pt-3 border-t border-gray-100 dark:border-gray-800">
+              <div>
+                <div class="text-[10px] text-gray-400 mb-0.5">电信</div>
+                <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.telecom)}`}>{lat.telecom}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
+              </div>
+              <div>
+                <div class="text-[10px] text-gray-400 mb-0.5">联通</div>
+                <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.unicom)}`}>{lat.unicom}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
+              </div>
+              <div>
+                <div class="text-[10px] text-gray-400 mb-0.5">移动</div>
+                <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.mobile)}`}>{lat.mobile}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- ========== AI 助手专区 ========== -->
+  <section id="ai-section" class="relative py-16 sm:py-20 mt-8">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-brand-50/50 to-white dark:from-brand-900/20 dark:via-brand-900/10 dark:to-gray-950 -z-10"></div>
+    <div class="absolute inset-0 -z-10 opacity-30 dark:opacity-20" style="background-image: radial-gradient(circle at 1px 1px, rgba(159,232,112,0.3) 1px, transparent 0); background-size: 24px 24px;"></div>
+
+    <div class="container-page">
+      <div class="max-w-2xl mx-auto text-center mb-10">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white dark:bg-gray-900 border border-brand-200 dark:border-brand-800/50 mb-4">
+          <svg class="w-3.5 h-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+          </svg>
+          <span class="text-xs font-semibold text-brand-700 dark:text-brand-300">AI 助手 · 46 篇知识库</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3 tracking-tight">说人话就行，剩下的 AI 帮你想</h2>
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">不知道什么参数合适？把运营商、预算、用途告诉 AI，它会从实测数据里挑最匹配的方案给你。</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto card overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between bg-white/80 dark:bg-gray-900/80 backdrop-blur">
+          <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-400/60"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/60"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-400/60"></span>
+            </div>
+            <span class="text-xs text-gray-500 dark:text-gray-400 ml-2 font-medium">机鉴 AI</span>
+          </div>
+          <span class="text-[10px] text-gray-400">中文优化</span>
+        </div>
+        <div class="p-6 sm:p-8">
+          <div id="ai-dialog-main">
+            <div class="grid sm:grid-cols-2 gap-2.5 mb-5">
+              {quickPrompts.map((prompt, idx) => (
+                <button class="quick-prompt text-left px-4 py-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 text-sm text-gray-600 dark:text-gray-300 hover:border-brand-300 dark:hover:border-brand-700 hover:bg-white dark:hover:bg-gray-900 transition-all" data-query={prompt}>
+                  <span class="text-gray-400 mr-2 text-xs font-mono">{String(idx + 1).padStart(2, '0')}</span>
+                  {prompt}
+                </button>
+              ))}
+            </div>
+            <div class="flex gap-2">
+              <input
+                type="text"
+                id="ai-input-main"
+                placeholder="比如：联通宽带，月预算 ¥30，主要跑代理..."
+                class="flex-1 px-4 py-3.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-base text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none"
+              />
+              <button id="ai-send-main" class="px-6 py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold transition-colors flex-shrink-0">
+                提问
+              </button>
+            </div>
+          </div>
+          <div id="ai-result-main" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 知识速查 ========== -->
+  <section class="container-page py-16 sm:py-20">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">知识速查</h2>
+        <p class="text-gray-500 dark:text-gray-400">看不太懂别人的测评？先扫一眼基础概念</p>
+      </div>
+      <a href="/knowledge" class="hidden sm:inline-flex items-center gap-1 text-sm text-brand-600 dark:text-brand-400 hover:underline font-medium">
+        全部 46 篇
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {featuredKnowledge.map(k => {
+        const colorMap: any = {
+          '线路': 'bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300',
+          '概念': 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
+          '面板': 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
+        };
+        const tagColor = colorMap[k.category] || colorMap['概念'];
+        return (
+          <a href="/knowledge" class="card p-4 hover:border-brand-300 dark:hover:border-brand-700 transition-all group block">
+            <div class="flex items-center gap-2 mb-2">
+              <span class={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${tagColor}`}>{k.category}</span>
+              {k.ipRange && <span class="text-[10px] text-gray-400 font-mono">{k.ipRange}</span>}
+            </div>
+            <h3 class="font-bold text-gray-900 dark:text-white text-[15px] mb-1.5 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">{k.name}</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">{k.brief}</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- ========== 底部 CTA ========== -->
+  <section class="container-page py-12 sm:py-16">
+    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-900 dark:to-black p-10 sm:p-14 text-center">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
+      <div class="absolute bottom-0 left-0 w-48 h-48 bg-brand-400/10 rounded-full blur-3xl -ml-10 -mb-10"></div>
+      <div class="relative">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-3 tracking-tight">还在犹豫？先去对比页看看</h2>
+        <p class="text-gray-400 mb-7 max-w-xl mx-auto">18 家服务商 · 12 列数据 · 三网延迟一眼看清</p>
+        <a href="/compare" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-brand-400 hover:bg-brand-500 text-gray-900 font-bold transition-colors">
+          打开选购指南
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-6"></div>
+</BaseLayout>
+
+<script>
+  (function() {
+    function setupAI(inputId, sendId, resultId) {
+      const input = document.getElementById(inputId);
+      const sendBtn = document.getElementById(sendId);
+      const resultArea = document.getElementById(resultId);
+      if (!input || !sendBtn || !resultArea) return;
+
+      let loading = false;
+
+      async function askAI(query) {
+        if (loading || !query.trim()) return;
+        loading = true;
+        resultArea.classList.remove('hidden');
+        resultArea.innerHTML = `<div class="flex items-center gap-3 py-8 justify-center text-sm text-gray-400">
+          <svg class="animate-spin w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+          正在思考中...
+        </div>`;
+        try {
+          const res = await fetch(`http://localhost:4399/api/chat?q=${encodeURIComponent(query)}`);
+          const data = await res.json();
+          if (data.error) {
+            resultArea.innerHTML = `<div class="text-sm text-red-500 p-4 rounded-2xl bg-red-50 dark:bg-red-900/20">${data.error}</div><button class="ai-retry mt-3 text-sm text-brand-600 hover:underline font-medium">← 重新提问</button>`;
+          } else {
+            resultArea.innerHTML = data.html + `<div class="mt-4 flex gap-4"><button class="ai-retry text-sm text-brand-600 hover:underline font-medium">重新提问</button><a href="/compare" class="text-sm text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 font-medium">去对比页看看 →</a></div>`;
+          }
+        } catch {
+          resultArea.innerHTML = `<div class="text-sm text-gray-500 p-4 rounded-2xl bg-gray-50 dark:bg-gray-900">AI 服务暂时不可用，请稍后再试</div><button class="ai-retry mt-3 text-sm text-brand-600 hover:underline font-medium">← 重新提问</button>`;
+        }
+        loading = false;
+        // 重新绑定重试按钮
+        resultArea.querySelectorAll('.ai-retry').forEach(btn => {
+          btn.addEventListener('click', () => {
+            resultArea.classList.add('hidden');
+            resultArea.innerHTML = '';
+            input.value = '';
+          });
+        });
+      }
+
+      sendBtn.addEventListener('click', () => askAI(input.value));
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') askAI(input.value); });
+    }
+
+    // 顶部小 AI 框
+    setupAI('ai-input', 'ai-send', 'ai-result');
+    // 中部大 AI 框
+    setupAI('ai-input-main', 'ai-send-main', 'ai-result-main');
+
+    // quick prompt 按钮：填到对应输入框并发送
+    document.querySelectorAll('.quick-prompt').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const query = this.dataset.query;
+        // 优先填入主对话框
+        const mainInput = document.getElementById('ai-input-main');
+        const topInput = document.getElementById('ai-input');
+        if (mainInput) {
+          mainInput.value = query;
+          mainInput.focus();
+        } else if (topInput) {
+          topInput.value = query;
+        }
+        // 滚动到 AI 区
+        document.getElementById('ai-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // 触发主对话框的发送
+        setTimeout(() => {
+          document.getElementById('ai-send-main')?.click();
+        }, 600);
+      });
+    });
+  })();
+</script>

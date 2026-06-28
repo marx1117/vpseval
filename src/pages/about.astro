@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于 - 机鉴" description="机鉴是一个 VPS 选型与知识库，收集全球服务商的客观数据，帮你快速找到适合自己场景的机器。">
+  <div class="container-page pt-16 sm:pt-24 pb-10">
+    <div class="max-w-2xl mx-auto text-center mb-10">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight leading-[1.1]">关于机鉴</h1>
+      <p class="text-lg sm:text-xl lg:text-2xl text-gray-500 dark:text-gray-300">VPS 选型与知识库</p>
+    </div>
+
+      <div class="space-y-8 text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">我们做什么</h2>
+          <p>
+            机鉴收集全球 VPS 服务商的客观数据——价格、配置、三网延迟——帮你快速找到适合自己场景的机器。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">数据来源</h2>
+          <p>
+            延迟数据来自 ITDog 等公开测速平台的全球 Ping 节点，在晚高峰时段（21:00 UTC+8）采集取均值。价格和配置来自服务商官网公开页面的实时抓取。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">内容范围</h2>
+          <p>
+            我们聚焦 VPS（虚拟专用服务器）和代理部署方案。代理内容仅限开源脚本的部署教程，不提供任何配置文件或节点信息。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">推荐标准</h2>
+          <p>
+            所有推荐遵循同一原则：开源可审计、社区活跃、有持续维护记录。推荐顺序由数据客观决定，不因商业利益调整排名。
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">联系我们</h2>
+          <p>
+            如果你发现数据有误、有想推荐的服务商、或有任何建议，欢迎通过 GitHub Issues 反馈。站点本身也是开源的。
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

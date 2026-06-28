@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  
+  /* Wise exact brand colors */
+  --color-wise-green: #9FE870;
+  --color-wise-navy: #163300;
+  --color-wise-bright: #2ED06E;
+
+  /* Derived palette from Wise brand */
+  --color-brand-50: #f4fdf0;
+  --color-brand-100: #e4fbd5;
+  --color-brand-200: #caf7ad;
+  --color-brand-300: #b0f385;
+  --color-brand-400: #9FE870;
+  --color-brand-500: #7edb50;
+  --color-brand-600: #5ec030;
+  --color-brand-700: #40991d;
+  --color-brand-800: #2e7314;
+  --color-brand-900: #1f4f0d;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-white text-[#163300] dark:bg-gray-950 dark:text-gray-100;
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply max-w-6xl mx-auto px-5 sm:px-6 lg:px-8;
+  }
+}
+
+/* Wise-style button */
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-400 hover:bg-brand-500 text-brand-900 font-bold transition-colors text-[15px] leading-none;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-bold hover:border-gray-400 dark:hover:border-gray-500 transition-colors text-[15px] leading-none;
+}
+
+/* Wise-style card */
+.card {
+  @apply rounded-3xl bg-white dark:bg-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.02)] border border-gray-100 dark:border-gray-800;
+}

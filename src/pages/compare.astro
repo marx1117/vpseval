@@ -1,0 +1,310 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { providers } from '../lib/data';
+import KnowledgeTag from '../components/KnowledgeTag.astro';
+---
+
+<BaseLayout title="选购指南 - 机鉴" description="18 家精选 VPS 服务商，价格、配置、机房、线路、延迟对比数据，按三网延迟排序。">
+<div class="container-page pt-16 sm:pt-24 pb-10">
+  <div class="max-w-2xl mx-auto text-center mb-10">
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight leading-[1.1]">选购指南</h1>
+    <p class="text-lg sm:text-xl lg:text-2xl text-gray-500 dark:text-gray-300">不同场景关注的重点不同，合适的才是最好的</p>
+  </div>
+
+  <!-- 选购优先级速查 -->
+  <div class="card mb-8">
+    <div class="overflow-x-auto rounded-3xl">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-gray-50 dark:border-gray-800/50 text-left">
+            <th class="py-2.5 px-4 text-base font-medium text-gray-400 w-1/4">你的需求</th>
+            <th class="py-2.5 px-3 text-base font-medium text-gray-400"><span class="inline-flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-600 text-[10px] font-bold flex items-center justify-center">1</span>第一优先</span></th>
+            <th class="py-2.5 px-3 text-base font-medium text-gray-400"><span class="inline-flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 text-[10px] font-bold flex items-center justify-center">2</span>第二优先</span></th>
+            <th class="py-2.5 px-3 text-base font-medium text-gray-400"><span class="inline-flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 text-[10px] font-bold flex items-center justify-center">3</span>第三优先</span></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50 dark:divide-gray-800/50">
+          {[
+            { scene: '面向国内用户建站', p1: '线路 (CN2 GIA)', p2: '存储 (NVMe)', p3: '内存 (2GB+)' },
+            { scene: '个人博客 / 学习', p1: '价格', p2: '内存 (1GB)', p3: '线路 (CN2 GT 即可)' },
+            { scene: '外贸 / 跨境电商', p1: '机房位置', p2: '稳定性 / SLA', p3: '带宽' },
+            { scene: '流媒体解锁', p1: 'IP 原生性', p2: '线路', p3: '存储' },
+            { scene: '科学上网', p1: '线路 (CN2 GIA)', p2: '带宽', p3: '价格' },
+            { scene: 'PT 下载', p1: '流量 / 不限量', p2: '存储 (HDD 可)', p3: '价格' },
+          ].map(row => (
+            <tr class="hover:bg-gray-50/30 dark:hover:bg-gray-800/20">
+              <td class="py-2.5 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">{row.scene}</td>
+              <td class="py-2.5 px-3 text-sm text-brand-600 dark:text-brand-400 font-medium">{row.p1}</td>
+              <td class="py-2.5 px-3 text-sm text-blue-600 dark:text-blue-400">{row.p2}</td>
+              <td class="py-2.5 px-3 text-sm text-emerald-600 dark:text-emerald-400">{row.p3}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 选购知识卡片 -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    {[
+      { title: '🌐 网络线路', tag: '核心', color: 'brand', items: ['CN2 GIA 电信顶级，IP:59.43', 'AS9929 联通精品，IP:10099', 'CMIN2 移动精品，IP:223.120', '普通 BGP 晚高峰丢包可达精品线 5-10 倍'] },
+      { title: '💾 存储类型', tag: '核心', color: 'brand', items: ['NVMe SSD > SATA SSD >> HDD', 'SSD 是底线，HDD 不该考虑', 'NVMe 速度是 SATA 的 3-5 倍', '数据库密集应用优先 NVMe'] },
+      { title: '🧠 内存与 CPU', tag: '核心', color: 'brand', items: ['WordPress 建议 1-2GB 起步', '电商站 2-4GB，2 核舒适区', '区分共享 CPU 和独享 CPU', '共享 CPU 高峰期可能被抢资源'] },
+      { title: '📶 带宽 vs 流量', tag: '核心', color: 'brand', items: ['带宽 = 端口速率上限 (Mbps)', '流量 = 月度可传输总量 (TB)', '无限流量但限 1Mbps = 体验差', '看视频选高带宽，下载选高流量'] },
+      { title: '🔑 IP 质量', tag: '进阶', color: 'blue', items: ['独立 IP 优于共享 IP', '原生 IP vs 广播 IP 影响解锁', '检查是否被墙、黑名单状态', 'IP 欺诈分影响邮件和部分站点'] },
+      { title: '🛡️ 虚拟化架构', tag: '进阶', color: 'blue', items: ['KVM > OpenVZ，接近物理机', 'OpenVZ 超售风险高且内核受限', 'KVM 可自定义内核、装 Docker', '低价 VPS 超售比例往往更高'] },
+      { title: '🗺️ 机房位置', tag: '进阶', color: 'blue', items: ['国内用户：香港 > 东京 > 美西', '物理距离决定基础延迟下限', '香港 30-50ms，洛杉矶 140-180ms', '多机房可选时优先选最近'] },
+      { title: '🔄 退款与售后', tag: '避坑', color: 'rose', items: ['是否 3-7 天无理由退款？', '24/7 技术支持？中文客服？', '出问题时响应速度比参数重要', '无监控面板 = 带宽承诺存疑'] },
+      { title: '⚠️ 超售与扩展', tag: '避坑', color: 'rose', items: ['能否在线升级 CPU/内存？', '升级是否需要迁移数据？', '运营年限越长越可靠', '低价 VPS 超售比例通常更高'] },
+    ].map(card => {
+      const bg = { brand: 'bg-brand-50 dark:bg-brand-900/20 border-brand-100 dark:border-brand-900/30', blue: 'bg-blue-50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-900/30', rose: 'bg-rose-50 dark:bg-rose-900/20 border-rose-100 dark:border-rose-900/30' };
+      const tag = { brand: 'bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300', blue: 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300', rose: 'bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300' };
+      return (
+        <div class={`rounded-2xl border ${bg[card.color]} p-5`}>
+          <div class="flex items-center gap-2 mb-3">
+            <h3 class="text-base font-bold text-gray-800 dark:text-gray-200">{card.title}</h3>
+            <span class={`text-xs px-1.5 py-0.5 rounded-full font-medium ${tag[card.color]}`}>{card.tag}</span>
+          </div>
+          <ul class="space-y-1.5">
+            {card.items.map(item => (
+              <li class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed flex items-start gap-1.5">
+                <span class="text-gray-300 dark:text-gray-600 mt-0.5">•</span>
+                <span set:html={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    })}
+  </div>
+  <!-- Search + Table wrapper to prevent layout jitter -->
+  <div id="search-section">
+  <!-- Search -->
+  <div class="mb-6">
+    <div class="relative">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="搜索服务商、机房、线路、流媒体、月付..."
+        class="w-full pl-10 pr-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none"
+      />
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card">
+    <!-- Mobile scroll hint -->
+    <div class="flex items-center gap-2 text-xs text-gray-400 px-4 py-2 border-b border-gray-50 dark:border-gray-800/50 sm:hidden">
+      <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      <span>横滑查看更多列</span>
+    </div>
+    <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-gray-100 dark:border-gray-800 text-left">
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap sticky left-0 bg-white dark:bg-gray-900 z-10">服务商</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">机房</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">线路</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">配置/存储</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">流量/带宽</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">IP更换</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">退款</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap hidden md:table-cell">流媒体</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">月付</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">官网</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-50 dark:divide-gray-800/50">
+        {providers.map(p => (
+          <tr
+            class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 compare-row group"
+            data-name={p.name.toLowerCase()}
+            data-routes={p.routes.map(r => r.toLowerCase()).join(',')}
+            data-locations={p.locationsCN.map(l => l.toLowerCase()).join(',')}
+            data-tags={p.tags.map(t => t.toLowerCase()).join(',')}
+            data-streaming={p.streaming.toLowerCase()}
+            data-price={p.priceFrom}
+          >
+            <td class="px-2.5 py-2 sticky left-0 bg-white dark:bg-gray-900 group-hover:bg-gray-50/50 dark:group-hover:bg-gray-800/30 z-10">
+              <span class="font-medium text-gray-900 dark:text-white text-sm">{p.name}</span>
+            </td>
+            <td class="px-2.5 py-2">
+              <div class="flex flex-wrap gap-1">
+                {p.locationsCN.map((locCN, i) => {
+                  const locKey = p.locations[i];
+                  const nodeLat = p.latency[locKey];
+                  return (
+                    <span class="inline-flex cursor-help node-hover" data-node-name={locCN} data-telecom={nodeLat?.telecom} data-unicom={nodeLat?.unicom} data-mobile={nodeLat?.mobile}>
+                      <span class="text-xs font-medium text-brand-600 dark:text-brand-400 underline decoration-dotted underline-offset-2">
+                        {locCN}
+                      </span>
+                    </span>
+                  );
+                })}
+              </div>
+            </td>
+            <td class="px-2.5 py-2">
+              <div class="flex flex-wrap gap-1">
+                {p.routes.map(r => (
+                  <KnowledgeTag name={r} />
+                ))}
+              </div>
+            </td>
+            <td class="px-2.5 py-2">
+              <div class="text-sm leading-tight font-medium text-gray-700 dark:text-gray-400">
+                <div>{p.minConfig}</div>
+                <div class="text-gray-400">{p.storageType}</div>
+              </div>
+            </td>
+            <td class="px-2.5 py-2 whitespace-nowrap text-sm">
+              <div class="text-gray-700 dark:text-gray-300 font-medium">{p.traffic}</div>
+              <div class="text-gray-400">{p.portSpeed}</div>
+            </td>
+            <td class="px-2.5 py-2 whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:table-cell">{p.ipPolicy}</td>
+            <td class="px-2.5 py-2 whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:table-cell">{p.refund}</td>
+            <td class="px-2.5 py-2 hidden md:table-cell">
+              <div class="flex items-center gap-1.5">
+                {p.streaming.includes('Netflix') && (
+                  <span class="relative group cursor-help">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E50914"/><text x="12" y="17" text-anchor="middle" font-family="Arial Black,sans-serif" font-weight="900" font-size="14" fill="white">N</text></svg>
+                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block pointer-events-none z-50"><span class="block bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">Netflix</span></span>
+                  </span>
+                )}
+                {p.streaming.includes('Disney') && (
+                  <span class="relative group cursor-help">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#113CCF"/><text x="12" y="18" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="16" fill="white">D+</text></svg>
+                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block pointer-events-none z-50"><span class="block bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">Disney+</span></span>
+                  </span>
+                )}
+                {p.streaming.includes('YouTube') && (
+                  <span class="relative group cursor-help">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF0000"/><text x="12" y="17" text-anchor="middle" font-family="Arial Black,sans-serif" font-weight="900" font-size="11" fill="white">▶</text></svg>
+                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block pointer-events-none z-50"><span class="block bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">YouTube</span></span>
+                  </span>
+                )}
+                {p.streaming.includes('HBO') && (
+                  <span class="relative group cursor-help">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#5822B4"/><text x="12" y="18" text-anchor="middle" font-family="Arial Black,sans-serif" font-weight="900" font-size="10" fill="white">HBO</text></svg>
+                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block pointer-events-none z-50"><span class="block bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">HBO Max</span></span>
+                  </span>
+                )}
+                {!p.streaming.includes('Netflix') && !p.streaming.includes('Disney') && !p.streaming.includes('YouTube') && !p.streaming.includes('HBO') && (
+                  <span class="text-sm text-gray-300">—</span>
+                )}
+              </div>
+            </td>
+            <td class="px-2.5 py-2 whitespace-nowrap">
+              <span class="font-mono font-medium text-gray-900 dark:text-white text-sm">${p.priceFrom}<span class="text-sm text-gray-400 font-normal">/月</span></span>
+            </td>
+            <td class="px-2.5 py-2 whitespace-nowrap">
+              <a href={`/go/${p.goSlug || p.id}`} target="_blank" rel="nofollow noopener" class="inline-flex items-center gap-1 text-sm text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium">官网<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Result count -->
+  <div id="result-count" class="text-xs text-gray-400 mt-2 text-right"></div>
+  </div>
+  <!-- end search-section -->
+
+  <!-- Shared tooltip for node latency -->
+  <div id="node-tooltip" class="fixed hidden z-50 pointer-events-none" style="transform:translateX(-50%)">
+    <span class="block w-3 h-3 bg-gray-900 dark:bg-white rotate-45 -mb-1 mx-auto"></span>
+    <div class="bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl p-3 text-xs shadow-xl"></div>
+  </div>
+
+</div>
+</BaseLayout>
+
+<script>
+  // Node latency tooltip
+  (function() {
+    const tooltip = document.getElementById('node-tooltip');
+    const tooltipInner = tooltip?.querySelector('div');
+    if (!tooltip || !tooltipInner) return;
+
+    document.querySelectorAll('.node-hover').forEach(el => {
+      el.addEventListener('mouseenter', function(e) {
+        const name = this.dataset.nodeName;
+        const t = this.dataset.telecom;
+        const u = this.dataset.unicom;
+        const m = this.dataset.mobile;
+        tooltipInner.innerHTML = `<span class="font-medium text-sm block mb-2">${name}</span>
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between gap-8"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-400"></span>电信</span><span class="font-mono font-medium">${t}ms</span></div>
+            <div class="flex items-center justify-between gap-8"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-400"></span>联通</span><span class="font-mono font-medium">${u}ms</span></div>
+            <div class="flex items-center justify-between gap-8"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-400"></span>移动</span><span class="font-mono font-medium">${m}ms</span></div>
+          </div>`;
+        tooltip.classList.remove('hidden');
+      });
+      el.addEventListener('mousemove', function(e) {
+        tooltip.style.left = e.clientX + 'px';
+        tooltip.style.top = (e.clientY + 8) + 'px';
+      });
+      el.addEventListener('mouseleave', function() {
+        tooltip.classList.add('hidden');
+      });
+    });
+  })();
+
+  // Lock search section height to prevent layout jitter when filtering
+  const searchSection = document.getElementById('search-section');
+  if (searchSection) {
+    searchSection.style.minHeight = searchSection.offsetHeight + 'px';
+  }
+
+  // Search
+  (function() {
+    const searchInput = document.getElementById('search-input');
+    const rows = document.querySelectorAll('.compare-row');
+    const total = rows.length;
+
+    function updateDisplay() {
+      const searchText = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const name = row.dataset.name || '';
+        const routes = row.dataset.routes || '';
+        const locations = row.dataset.locations || '';
+        const tags = row.dataset.tags || '';
+        const streaming = row.dataset.streaming || '';
+        const price = parseFloat(row.dataset.price || '999');
+
+        const matchesSearch = !searchText || [name, routes, locations, tags, streaming].some(s => s.includes(searchText));
+        const priceNum = parseFloat(searchText);
+        const isPriceSearch = !isNaN(priceNum) && searchText !== '' && /^\d+\.?\d*$/.test(searchText);
+        const matchesPrice = !isPriceSearch || price <= priceNum;
+        const visible = (isPriceSearch || matchesSearch) && matchesPrice;
+        row.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+      });
+
+      const resultEl = document.getElementById('result-count');
+      if (resultEl) resultEl.textContent = searchText ? `搜索"${searchText}"：${visibleCount} / ${total} 家匹配` : `共 ${total} 家服务商`;
+    }
+
+    searchInput.addEventListener('input', updateDisplay);
+    updateDisplay();
+  })();
+</script>
+
+<style>
+  /* Sticky first column: right shadow when scrolled */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  th.sticky, td.sticky {
+    box-shadow: 2px 0 4px -2px rgba(0,0,0,0.06);
+  }
+  .dark th.sticky, .dark td.sticky {
+    box-shadow: 2px 0 4px -2px rgba(255,255,255,0.04);
+  }
+</style>

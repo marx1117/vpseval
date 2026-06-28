@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { articles, getArticle } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return articles.map(a => ({ params: { slug: a.slug } }));
+}
+
+const { slug } = Astro.params;
+const article = getArticle(slug);
+
+if (!article) {
+  return Astro.redirect('/knowledge');
+}
+---
+
+<BaseLayout title={`${article.title} - 机鉴`} description={article.summary}>
+  <div class="container-page py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8 text-xs text-gray-400 dark:text-gray-500">
+      <a href="/" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">首页</a>
+      <span class="mx-2">/</span>
+      <a href="/knowledge" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">知识库</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-600 dark:text-gray-400">{article.title}</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300">{article.level}</span>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400">{article.category}</span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 ml-auto">{article.time}</span>
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white leading-tight mb-8">{article.title}</h1>
+
+    <!-- Content -->
+    <div class="article-body">
+      <Fragment set:html={article.content} />
+    </div>
+
+    <!-- Back -->
+    <div class="mt-12 pt-6 border-t border-gray-100 dark:border-gray-800">
+      <a href="/knowledge" class="inline-flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m0 0l7 7m-7-7l7-7"/>
+        </svg>
+        返回知识库
+      </a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* Article formatting — scoped via .article-body class */
+  .article-body {
+    color: #4b5563;
+    font-size: 0.875rem;
+    line-height: 1.75;
+  }
+  .article-body h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .article-body h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .article-body p {
+    margin-bottom: 1rem;
+  }
+  .article-body strong {
+    color: #1f2937;
+    font-weight: 600;
+  }
+  .article-body a {
+    color: #65a30d;
+    text-decoration: none;
+  }
+  .article-body a:hover {
+    text-decoration: underline;
+  }
+  .article-body code {
+    font-size: 0.815rem;
+    background: #f3f4f6;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  }
+  .article-body pre {
+    position: relative;
+    background: #1e293b;
+    color: #e2e8f0;
+    font-size: 0.815rem;
+    border-radius: 0.75rem;
+    padding: 1rem 3rem 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+    line-height: 1.6;
+  }
+  .article-body .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.4;
+    font-family: inherit;
+  }
+  .article-body .copy-btn:hover {
+    color: #e2e8f0;
+    background: rgba(255,255,255,0.15);
+  }
+  .article-body .copy-btn.copied {
+    color: #9FE870;
+    border-color: rgba(159,232,112,0.3);
+  }
+  .article-body pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  .article-body ul,
+  .article-body ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .article-body li {
+    margin-bottom: 0.375rem;
+  }
+  .article-body dt {
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 0.75rem;
+  }
+  .article-body dd {
+    color: #4b5563;
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+  }
+  .article-body table {
+    width: 100%;
+    font-size: 0.815rem;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    display: block;
+    overflow-x: auto;
+  }
+  .article-body th {
+    background: #f9fafb;
+    text-align: left;
+    font-weight: 500;
+    color: #374151;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+  .article-body td {
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid #f3f4f6;
+    color: #4b5563;
+  }
+  .article-body tr:first-child td {
+    border-top: none;
+  }
+  .article-body img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+  }
+
+  /* Dark mode */
+  .dark .article-body { color: #d1d5db; }
+  .dark .article-body h2 { color: #f3f4f6; border-color: #374151; }
+  .dark .article-body h3 { color: #e5e7eb; }
+  .dark .article-body p { color: #d1d5db; }
+  .dark .article-body strong { color: #f3f4f6; }
+  .dark .article-body a { color: #9FE870; }
+  .dark .article-body code { background: #374151; color: #e5e7eb; }
+  .dark .article-body pre { background: #0f172a; color: #e2e8f0; }
+  .dark .article-body th { background: #1f2937; color: #e5e7eb; border-color: #374151; }
+  .dark .article-body td { color: #d1d5db; border-color: #1f2937; }
+  .dark .article-body dt { color: #f3f4f6; }
+  .dark .article-body dd { color: #d1d5db; }
+  .dark .article-body ul, .dark .article-body ol, .dark .article-body li { color: #d1d5db; }
+</style>
+
+<script>
+  // Add copy buttons to all pre>code blocks inside article-body
+  document.querySelectorAll('.article-body pre').forEach(pre => {
+    const code = pre.querySelector('code');
+    if (!code) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '复制';
+    btn.addEventListener('click', async () => {
+      const text = code.textContent || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = '已复制';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '复制';
+          btn.classList.remove('copied');
+        }, 2000);
+      } catch {
+        btn.textContent = '失败';
+        setTimeout(() => { btn.textContent = '复制'; }, 2000);
+      }
+    });
+    pre.appendChild(btn);
+  });
+</script>

@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articles, getCategories } from '../lib/articles';
+
+const categories = getCategories();
+const allLevels = ['全部', '入门', '进阶'];
+---
+
+<BaseLayout title="知识库 - 机鉴" description="46 篇 VPS 知识文章，覆盖选购、线路、安全、运维、代理部署等 13 个分类，从入门到进阶。">
+  <div class="container-page pt-16 sm:pt-24 pb-10">
+    <div class="max-w-2xl mx-auto text-center mb-10">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight leading-[1.1]">知识库</h1>
+      <p class="text-lg sm:text-xl lg:text-2xl text-gray-500 dark:text-gray-300">VPS 基础知识、选购技巧、运维教程，{articles.length} 篇文章持续更新</p>
+    </div>
+
+    <!-- Search -->
+    <div class="relative mb-6">
+      <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-300 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+      </svg>
+      <input id="search-input" type="text" placeholder="搜索文章标题或关键词..." class="w-full pl-10 pr-10 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-brand-400 dark:focus:border-brand-500 focus:ring-1 focus:ring-brand-200 dark:focus:ring-brand-800 transition-colors">
+      <button id="search-clear" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 flex items-center justify-center transition-colors hidden" title="清除搜索">
+        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Category filter -->
+    <div class="flex flex-wrap gap-2 mb-4" id="category-filter">
+      <button class="filter-btn active px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-brand-300 dark:hover:border-brand-600 hover:text-brand-600 dark:hover:text-brand-400 transition-colors" data-cat="全部">全部</button>
+      {categories.map(cat => (
+        <button class="filter-btn px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-brand-300 dark:hover:border-brand-600 hover:text-brand-600 dark:hover:text-brand-400 transition-colors" data-cat={cat}>{cat}</button>
+      ))}
+    </div>
+
+    <!-- Level filter -->
+    <div class="flex flex-wrap gap-2 mb-8" id="level-filter">
+      {allLevels.map(level => (
+        <button class="lvl-btn px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-brand-300 dark:hover:border-brand-600 hover:text-brand-600 dark:hover:text-brand-400 transition-colors" data-level={level === '全部' ? '全部' : level}>{level}</button>
+      ))}
+    </div>
+
+    <!-- Article grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="article-grid">
+      {articles.map(a => (
+        <a href={`/knowledge/${a.slug}`} class="article-card rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 hover:shadow-sm hover:border-brand-200 dark:hover:border-brand-700 transition-all group flex flex-col" data-cat={a.category} data-level={a.level} data-search={`${a.title} ${a.summary}`}>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs px-1.5 py-0.5 rounded-full bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300">{a.level}</span>
+              <span class="text-xs px-1.5 py-0.5 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400">{a.category}</span>
+            </div>
+            <span class="text-xs text-gray-400 dark:text-gray-300 flex-shrink-0">{a.time}</span>
+          </div>
+          <h3 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors mb-2">{a.title}</h3>
+          <p class="text-xs text-gray-400 dark:text-gray-300 leading-relaxed mb-2 flex-1">{a.summary}</p>
+          <div class="flex items-center justify-end">
+            <span class="text-xs text-brand-600 dark:text-brand-400 font-medium">阅读 →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- No results -->
+    <div id="no-results" class="hidden text-center py-12">
+      <p class="text-sm text-gray-400 dark:text-gray-300">没有找到匹配的文章，试试其他关键词</p>
+    </div>
+
+    <div class="mt-8 p-6 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-center">
+      <p class="text-sm text-gray-500 dark:text-gray-300">
+        教程持续更新中。有想看的主题？用首页 AI 向导告诉我们需要什么。
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('search-input');
+  const searchClear = document.getElementById('search-clear');
+  const noResults = document.getElementById('no-results');
+
+  function getSearchQuery() {
+    return (searchInput?.value || '').trim().toLowerCase();
+  }
+
+  function filterArticles() {
+    const activeCat = document.querySelector('#category-filter .filter-btn.active')?.dataset.cat || '全部';
+    const activeLevel = document.querySelector('#level-filter .lvl-btn.active')?.dataset.level || '全部';
+    const query = getSearchQuery();
+
+    let visibleCount = 0;
+    document.querySelectorAll('.article-card').forEach(card => {
+      const catMatch = activeCat === '全部' || card.dataset.cat === activeCat;
+      const levelMatch = activeLevel === '全部' || card.dataset.level === activeLevel;
+      const searchMatch = !query || (card.dataset.search || '').toLowerCase().includes(query);
+      const show = catMatch && levelMatch && searchMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+
+    noResults?.classList.toggle('hidden', visibleCount > 0);
+  }
+
+  searchInput?.addEventListener('input', () => {
+    const hasValue = !!getSearchQuery();
+    searchClear?.classList.toggle('hidden', !hasValue);
+    filterArticles();
+  });
+
+  searchClear?.addEventListener('click', () => {
+    searchInput.value = '';
+    searchClear.classList.add('hidden');
+    searchInput.focus();
+    filterArticles();
+  });
+
+  document.querySelector('#category-filter')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('#category-filter .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterArticles();
+  });
+
+  document.querySelector('#level-filter')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.lvl-btn');
+    if (!btn) return;
+    document.querySelectorAll('#level-filter .lvl-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterArticles();
+  });
+</script>
+
+<style>
+  .filter-btn.active, .lvl-btn.active {
+    background-color: #9FE870;
+    border-color: #9FE870;
+    color: #163300;
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import { getKnowledge } from '../lib/knowledge';
+
+interface Props {
+  name: string;
+  size?: 'sm' | 'base';
+}
+
+const { name, size = 'sm' } = Astro.props;
+const knowledge = getKnowledge(name);
+
+const sizeClasses = size === 'base' ? 'text-sm px-2 py-0.5' : 'text-xs px-1.5 py-0.5';
+---
+
+<span class="ktag relative inline-flex whitespace-nowrap" data-tip={knowledge ? JSON.stringify({ name: knowledge.name, brief: knowledge.brief, ipRange: knowledge.ipRange }) : 'null'}>
+  <span class={`${sizeClasses} rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 cursor-help font-medium`}>
+    {name}
+    {knowledge && <span class="inline-block ml-0.5 opacity-40 text-xs">ⓘ</span>}
+  </span>
+</span>
+
+<script>
+  // Create a single floating tooltip element
+  let tipEl = document.getElementById('ktag-tooltip');
+  if (!tipEl) {
+    tipEl = document.createElement('div');
+    tipEl.id = 'ktag-tooltip';
+    tipEl.className = 'fixed hidden z-[9999] bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg p-3 text-xs leading-relaxed shadow-lg pointer-events-none';
+    tipEl.style.maxWidth = '280px';
+    document.body.appendChild(tipEl);
+  }
+
+  let activeTag = null;
+
+  function showTip(el) {
+    const raw = el.dataset.tip;
+    if (!raw || raw === 'null') return;
+    const data = JSON.parse(raw);
+    let html = `<span class="font-medium text-sm block mb-1">${data.name}</span>${data.brief}`;
+    if (data.ipRange && data.ipRange !== '-') {
+      html += `<span class="block mt-1 text-[11px] opacity-60">IP 网段: ${data.ipRange}</span>`;
+    }
+    tipEl.innerHTML = html;
+    tipEl.classList.remove('hidden');
+
+    const rect = el.getBoundingClientRect();
+    const tw = tipEl.offsetWidth;
+
+    let left = rect.left + rect.width / 2 - tw / 2;
+    if (left < 8) left = 8;
+    if (left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
+
+    tipEl.style.left = left + 'px';
+    tipEl.style.top = (rect.bottom + 6) + 'px';
+    activeTag = el;
+  }
+
+  function hideTip(el) {
+    if (activeTag === el) {
+      tipEl.classList.add('hidden');
+      activeTag = null;
+    }
+  }
+
+  document.querySelectorAll('.ktag[data-tip]').forEach(el => {
+    if (el.dataset.tip === 'null') return;
+    el.addEventListener('mouseenter', () => showTip(el));
+    el.addEventListener('mouseleave', () => hideTip(el));
+  });
+</script>

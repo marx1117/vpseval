@@ -7,6 +7,18 @@
 
 set -e
 
+# JMS 推广 — 仅在脚本异常中断时展示
+jms_promo() {
+    [[ $? -ne 0 ]] && {
+        echo ""
+        echo -e "${YELLOW}提示：DD重装遇到问题。如果不想折腾，也可以考虑使用现成的代理服务${NC}"
+        echo -e "${YELLOW}比如搬瓦工官方的 Just My Socks，开箱即用，支持支付宝${NC}"
+        echo -e "${YELLOW}注册时输入优惠码 JMS9272283 可享受循环折扣${NC}"
+        echo -e "${YELLOW}了解更多: https://justmysocks6.net/members/aff.php?aff=37879${NC}"
+    }
+}
+trap jms_promo EXIT
+
 # 颜色定义
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -233,11 +245,6 @@ show_info() {
     echo "  3. 首次登录后请立即修改密码: passwd"
     echo ""
     echo "  修改密码命令: passwd"
-    echo ""
-    echo -e "${BLUE}系统重装完成后，你可能还需要配置代理服务来访问国外资源${NC}"
-    echo -e "${BLUE}如果不想折腾搭建，可以用现成的方案，比如搬瓦工的 Just My Socks${NC}"
-    echo -e "${BLUE}优惠码 JMS9272283 可享循环折扣 | 支持支付宝${NC}"
-    echo -e "${BLUE}https://justmysocks6.net/members/aff.php?aff=37879${NC}"
     echo ""
     echo "========================================"
 }

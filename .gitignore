@@ -1,3 +1,12 @@
 .DS_Store
 Thumbs.db
 *.log
+node_modules/
+dist/
+docs/
+.wrangler/
+.env
+.workbuddy/
+.codebuddy/
+.astro/
+.uploads/
