@@ -7,18 +7,6 @@
 
 set -e
 
-# JMS 推广 — 仅在脚本异常中断时展示
-jms_promo() {
-    [[ $? -ne 0 ]] && {
-        echo ""
-        echo -e "${YELLOW}提示：DD重装遇到问题。如果不想折腾，也可以考虑使用现成的代理服务${NC}"
-        echo -e "${YELLOW}比如搬瓦工官方的 Just My Socks，开箱即用，支持支付宝${NC}"
-        echo -e "${YELLOW}注册时输入优惠码 JMS9272283 可享受循环折扣${NC}"
-        echo -e "${YELLOW}了解更多: https://justmysocks6.net/members/aff.php?aff=37879${NC}"
-    }
-}
-trap jms_promo EXIT
-
 # 颜色定义
 RED='\033[0;31m'
 GREEN='\033[0;32m'

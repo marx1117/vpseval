@@ -13,7 +13,7 @@ const featuredKnowledge = knowledgeBase.slice(0, 8);
 // 真实统计
 const stats = [
   { num: '18', label: '家服务商', sub: '精选实测' },
-  { num: '46', label: '篇知识库', sub: '持续更新' },
+  { num: '64', label: '篇知识库', sub: '持续更新' },
   { num: '24', label: '个一键脚本', sub: '开箱即用' },
   { num: '13', label: '个知识分类', sub: '系统梳理' },
 ];
@@ -170,10 +170,10 @@ function bestLatency(p: typeof providers[number]): { telecom: number; unicom: nu
       {featuredProviders.map(p => {
         const lat = bestLatency(p);
         return (
-          <a href="/compare" class="card p-5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md transition-all group block">
+          <div class="card p-5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md transition-all group block">
             <div class="flex items-start justify-between mb-3">
               <div>
-                <h3 class="font-bold text-gray-900 dark:text-white text-lg group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">{p.name}</h3>
+                <h3 class="font-bold text-gray-900 dark:text-white text-lg">{p.name}</h3>
                 <div class="flex items-center gap-1.5 mt-1">
                   {p.tags.slice(0, 2).map(tag => (
                     <span class="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">{tag}</span>
@@ -181,30 +181,34 @@ function bestLatency(p: typeof providers[number]): { telecom: number; unicom: nu
                 </div>
               </div>
               <div class="text-right">
-                <div class="text-2xl font-extrabold text-gray-900 dark:text-white tabular-nums">${p.priceFrom}</div>
-                <div class="text-[10px] text-gray-400 uppercase tracking-wide">/月起</div>
+                <div class="text-2xl font-extrabold text-gray-900 dark:text-white tabular-nums">{p.priceFrom}</div>
               </div>
             </div>
 
             <div class="text-xs text-gray-500 dark:text-gray-400 mb-3 leading-relaxed">
-              {p.minConfig} · {p.traffic} 流量 · {p.portSpeed}
+              {p.minConfig} · {p.traffic} · {p.portSpeed}
             </div>
 
-            <div class="grid grid-cols-3 gap-1.5 pt-3 border-t border-gray-100 dark:border-gray-800">
-              <div>
-                <div class="text-[10px] text-gray-400 mb-0.5">电信</div>
-                <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.telecom)}`}>{lat.telecom}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
+            <div class="flex items-end justify-between gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+              <div class="flex gap-6">
+                <div>
+                  <div class="text-[10px] text-gray-400 mb-0.5">电信</div>
+                  <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.telecom)}`}>{lat.telecom}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-gray-400 mb-0.5">联通</div>
+                  <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.unicom)}`}>{lat.unicom}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-gray-400 mb-0.5">移动</div>
+                  <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.mobile)}`}>{lat.mobile}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
+                </div>
               </div>
-              <div>
-                <div class="text-[10px] text-gray-400 mb-0.5">联通</div>
-                <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.unicom)}`}>{lat.unicom}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
-              </div>
-              <div>
-                <div class="text-[10px] text-gray-400 mb-0.5">移动</div>
-                <div class={`text-sm font-bold tabular-nums ${latencyColor(lat.mobile)}`}>{lat.mobile}<span class="text-[10px] font-normal text-gray-400">ms</span></div>
-              </div>
+              <a href={`/go/${p.goSlug || p.id}`} target="_blank" rel="nofollow noopener" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 hover:bg-brand-100 dark:hover:bg-brand-900/40 transition-colors flex-shrink-0">
+                官网
+              </a>
             </div>
-          </a>
+          </div>
         );
       })}
     </div>
@@ -221,7 +225,7 @@ function bestLatency(p: typeof providers[number]): { telecom: number; unicom: nu
           <svg class="w-3.5 h-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
           </svg>
-          <span class="text-xs font-semibold text-brand-700 dark:text-brand-300">机鉴 AI · 46 篇知识库</span>
+          <span class="text-xs font-semibold text-brand-700 dark:text-brand-300">机鉴 AI · 64 篇知识库</span>
         </div>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3 tracking-tight">说人话就行，剩下的 AI 帮你想</h2>
         <p class="text-gray-600 dark:text-gray-400 leading-relaxed">不知道什么参数合适？把运营商、预算、用途告诉 AI，它会从实测数据里挑最匹配的方案给你。</p>
@@ -275,7 +279,7 @@ function bestLatency(p: typeof providers[number]): { telecom: number; unicom: nu
         <p class="text-gray-500 dark:text-gray-400">看不太懂别人的测评？先扫一眼基础概念</p>
       </div>
       <a href="/knowledge" class="hidden sm:inline-flex items-center gap-1 text-sm text-brand-600 dark:text-brand-400 hover:underline font-medium">
-        全部 46 篇
+        全部 64 篇
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </a>
     </div>

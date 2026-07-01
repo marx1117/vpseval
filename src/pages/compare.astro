@@ -54,8 +54,8 @@ import KnowledgeTag from '../components/KnowledgeTag.astro';
       { title: '🔑 IP 质量', tag: '进阶', color: 'blue', items: ['独立 IP 优于共享 IP', '原生 IP vs 广播 IP 影响解锁', '检查是否被墙、黑名单状态', 'IP 欺诈分影响邮件和部分站点'] },
       { title: '🛡️ 虚拟化架构', tag: '进阶', color: 'blue', items: ['KVM > OpenVZ，接近物理机', 'OpenVZ 超售风险高且内核受限', 'KVM 可自定义内核、装 Docker', '低价 VPS 超售比例往往更高'] },
       { title: '🗺️ 机房位置', tag: '进阶', color: 'blue', items: ['国内用户：香港 > 东京 > 美西', '物理距离决定基础延迟下限', '香港 30-50ms，洛杉矶 140-180ms', '多机房可选时优先选最近'] },
-      { title: '🔄 退款与售后', tag: '避坑', color: 'rose', items: ['是否 3-7 天无理由退款？', '24/7 技术支持？中文客服？', '出问题时响应速度比参数重要', '无监控面板 = 带宽承诺存疑'] },
       { title: '⚠️ 超售与扩展', tag: '避坑', color: 'rose', items: ['能否在线升级 CPU/内存？', '升级是否需要迁移数据？', '运营年限越长越可靠', '低价 VPS 超售比例通常更高'] },
+      { title: '🏚️ 跑路与封禁', tag: '避坑', color: 'rose', items: ['小商家跑路概率高于大厂', '部分商家 TOS 禁止代理用途', 'IP 被墙通常需要付费更换', '社区长期口碑比促销价格重要'] },
     ].map(card => {
       const bg = { brand: 'bg-brand-50 dark:bg-brand-900/20 border-brand-100 dark:border-brand-900/30', blue: 'bg-blue-50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-900/30', rose: 'bg-rose-50 dark:bg-rose-900/20 border-rose-100 dark:border-rose-900/30' };
       const tag = { brand: 'bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300', blue: 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300', rose: 'bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300' };
@@ -111,9 +111,8 @@ import KnowledgeTag from '../components/KnowledgeTag.astro';
           <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">配置/存储</th>
           <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">流量/带宽</th>
           <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">IP更换</th>
-          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">退款</th>
           <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap hidden md:table-cell">流媒体</th>
-          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">月付</th>
+          <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">价格</th>
           <th class="py-2 px-2.5 text-sm font-medium text-gray-400 uppercase tracking-wider whitespace-nowrap">官网</th>
         </tr>
       </thead>
@@ -164,7 +163,6 @@ import KnowledgeTag from '../components/KnowledgeTag.astro';
               <div class="text-gray-400">{p.portSpeed}</div>
             </td>
             <td class="px-2.5 py-2 whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:table-cell">{p.ipPolicy}</td>
-            <td class="px-2.5 py-2 whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:table-cell">{p.refund}</td>
             <td class="px-2.5 py-2 hidden md:table-cell">
               <div class="flex items-center gap-1.5">
                 {p.streaming.includes('Netflix') && (
@@ -197,7 +195,7 @@ import KnowledgeTag from '../components/KnowledgeTag.astro';
               </div>
             </td>
             <td class="px-2.5 py-2 whitespace-nowrap">
-              <span class="font-mono font-medium text-gray-900 dark:text-white text-sm">${p.priceFrom}<span class="text-sm text-gray-400 font-normal">/月</span></span>
+              <span class="font-mono font-medium text-gray-900 dark:text-white text-sm">{p.priceFrom}</span>
             </td>
             <td class="px-2.5 py-2 whitespace-nowrap">
               <a href={`/go/${p.goSlug || p.id}`} target="_blank" rel="nofollow noopener" class="inline-flex items-center gap-1 text-sm text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium">官网<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>

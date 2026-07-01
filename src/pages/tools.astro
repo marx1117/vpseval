@@ -11,27 +11,27 @@ const scriptCategories = [
       { file: 'swap-setup.sh', name: 'Swap 配置', level: '入门', time: '1 min', desc: '自动计算推荐的 swap 大小，创建 swapfile 并优化 swappiness', features: ['自动计算', 'swapfile', 'fstab持久化', 'swappiness优化'] },
       { file: 'fail2ban-setup.sh', name: 'Fail2ban 防爆破', level: '入门', time: '2 min', desc: '安装并配置 Fail2ban，自动封禁暴力破解 IP', features: ['自动封禁', '可配阈值', 'SSH防护', 'systemd服务'] },
       { file: 'bbr-enable.sh', name: 'BBR 加速', level: '入门', time: '1 min', desc: '检查并启用 Google BBR TCP 拥塞控制，可选带宽测试', features: ['内核检查', '一键开启', '速度测试', '零风险'] },
-      { file: 'bbr-lotserver.sh', name: 'TCP 加速全家桶', level: '进阶', time: '3 min', desc: 'BBR/BBR Plus/锐速 三选一，含详细对比说明', features: ['BBR原版', 'BBR Plus', '锐速', '对比分析'] },
+      { file: 'bbr-lotserver.sh', name: 'TCP 加速全家桶', level: '进阶', time: '3 min', desc: 'BBR/BBR Plus/锐速 三选一，含详细对比说明', features: ['BBR原版', 'BBR Plus', '锐速', '对比分析'], enhancedFeatures: ['中文菜单', '一键启用'], communityCmd: `wget -qO tcp.sh https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh && bash tcp.sh` },
     ],
   },
   {
     name: '面板与 Docker',
     desc: '降低运维门槛的面板和容器工具',
     scripts: [
-      { file: '1panel-install.sh', name: '1Panel 面板', level: '入门', time: '2 min', desc: '轻运维面板安装/卸载/管理，从配置读取凭据，多防火墙支持', features: ['安装/卸载', '网站管理', 'Docker管理', '多防火墙'] },
+      { file: '1panel-install.sh', name: '1Panel 面板', level: '入门', time: '2 min', desc: '轻运维面板安装/卸载/管理，从配置读取凭据，多防火墙支持', features: ['安装/卸载', '网站管理', 'Docker管理', '多防火墙'], enhancedFeatures: ['状态切换', '凭据提取'], communityCmd: 'curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh | bash' },
       { file: 'docker-install.sh', name: 'Docker 安装', level: '入门', time: '2 min', desc: '安装 Docker CE + Compose，日志限制，hello-world 验证', features: ['Docker CE', 'Compose插件', '日志限制', '自动验证'] },
-      { file: 'netdata-install.sh', name: 'Netdata 监控', level: '进阶', time: '3 min', desc: '实时服务器监控面板，关闭遥测，限制访问，数据库引擎配置', features: ['实时监控', '关闭遥测', '访问限制', '数据库引擎'] },
+      { file: 'netdata-install.sh', name: 'Netdata 监控', level: '进阶', time: '3 min', desc: '实时服务器监控面板，关闭遥测，限制访问，数据库引擎配置', features: ['实时监控', '关闭遥测', '访问限制', '数据库引擎'], enhancedFeatures: ['预装依赖', '资源限制'], communityCmd: 'bash <(curl -Ss https://my-netdata.io/kickstart.sh) --stable-channel --disable-telemetry' },
     ],
   },
   {
     name: '性能检测',
     desc: 'VPS 到手后的验货和持续监测工具',
     scripts: [
-      { file: 'yabs-run.sh', name: 'YABS 综合跑分', level: '入门', time: '15 min', desc: 'CPU/内存/磁盘/网络一键测试，三种模式可选，含结果解读指南', features: ['CPU跑分', '磁盘IO', '网络测速', '结果解读'] },
+      { file: 'yabs-run.sh', name: 'YABS 综合跑分', level: '入门', time: '15 min', desc: 'CPU/内存/磁盘/网络一键测试，三种模式可选，含结果解读指南', features: ['CPU跑分', '磁盘IO', '网络测速', '结果解读'], enhancedFeatures: ['中文交互', '三模式'], communityCmd: 'curl -sL yabs.sh | bash' },
       { file: 'bench.sh', name: '综合快速测试', level: '入门', time: '2 min', desc: '快速 CPU 负载、内存速度、磁盘 IO、多地网络速度和延迟', features: ['CPU负载', '内存速度', '磁盘IO', '多地测速'] },
       { file: 'speedtest-cli.sh', name: '网速测试', level: '入门', time: '2 min', desc: '测试国内外多个节点的 Ping 延迟和下载速度，着色分级', features: ['多节点Ping', '下载测速', '着色分级', '国内外节点'] },
-      { file: 'nexttrace-install.sh', name: 'NextTrace 回程', level: '进阶', time: '3 min', desc: '安装 NextTrace，三网回程测试，线路特征解读，卸载', features: ['三网回程', '线路识别', '交互菜单', '一键卸载'] },
-      { file: 'ip-quality.sh', name: 'IP 质量检测', level: '入门', time: '2 min', desc: '欺诈分数、黑名单、Cloudflare/AWS 状态，风险评级', features: ['欺诈分数', '黑名单', 'CF/AWS检测', '风险评级'] },
+      { file: 'nexttrace-install.sh', name: 'NextTrace 回程', level: '进阶', time: '3 min', desc: '安装 NextTrace，三网回程测试，线路特征解读，卸载', features: ['三网回程', '线路识别', '交互菜单', '一键卸载'], enhancedFeatures: ['线路解读'], communityCmd: 'bash <(curl -Ls nxtrace.org/nt)' },
+      { file: 'ip-quality.sh', name: 'IP 质量检测', level: '入门', time: '2 min', desc: '欺诈分数、黑名单、Cloudflare/AWS 状态，风险评级', features: ['欺诈分数', '黑名单', 'CF/AWS检测', '风险评级'], enhancedFeatures: ['IP预览', '智能解析'], communityCmd: 'bash <(curl -Ls IP.Check.Place)' },
       { file: 'streaming-unlock.sh', name: '流媒体解锁', level: '入门', time: '1 min', desc: '检测 Netflix/Disney+/ChatGPT 等 13 项服务的解锁状态', features: ['Netflix', 'Disney+', 'ChatGPT', '13项检测'] },
     ],
   },
@@ -41,7 +41,7 @@ const scriptCategories = [
     scripts: [
       { file: 'backup-script.sh', name: '自动备份', level: '进阶', time: '2 min', desc: '备份 /etc /root /home 和数据库，可选 scp 远程上传，7天清理', features: ['系统备份', '数据库导出', '远程上传', '7天轮转'] },
       { file: 'log-clean.sh', name: '日志清理', level: '入门', time: '1 min', desc: '清理系统和应用日志、临时文件、包缓存、Docker 垃圾，配置 logrotate', features: ['系统日志', '应用日志', 'Docker清理', 'logrotate'] },
-      { file: 'dd-reinstall.sh', name: 'DD 重装系统', level: '进阶', time: '10 min', desc: '10 个系统可选，国内镜像加速，密码可自定义', features: ['10系统可选', '国内镜像', '自定义密码', '架构检测'] },
+      { file: 'dd-reinstall.sh', name: 'DD 重装系统', level: '进阶', time: '10 min', desc: '10 个系统可选，国内镜像加速，密码可自定义', features: ['10系统可选', '国内镜像', '自定义密码', '架构检测'], enhancedFeatures: ['安全提醒'], communityCmd: 'bash <(curl -sS https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh)' },
       { file: 'nezha-agent.sh', name: '哪吒探针 Agent', level: '入门', time: '2 min', desc: '安装哪吒监控客户端，自动检测架构，创建 systemd 服务', features: ['架构检测', 'systemd服务', 'TLS支持', '自动验证'] },
     ],
   },
@@ -54,6 +54,31 @@ const backendTools = [
   { name: 'IP 信誉查询', desc: 'AbuseIPDB 全球滥用数据库，查 IP 是否被举报', level: '入门', time: '1 min', url: 'https://www.abuseipdb.com/' },
 ];
 ---
+
+<style>
+  .tooltip-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px 6px;
+    background: #374151;
+    color: #e5e7eb;
+    font-size: 11px;
+    line-height: 1.4;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s;
+    z-index: 30;
+  }
+  .tooltip-btn:hover::after {
+    opacity: 1;
+    transition-delay: 0s;
+  }
+</style>
 
 <BaseLayout title="实用工具 - 机鉴" description="24 个 VPS 一键脚本（环境部署、系统安全、代理搭建），9 个推荐运维平台，开箱即用。">
   <div class="container-page pt-16 sm:pt-24 pb-10">
@@ -73,25 +98,35 @@ const backendTools = [
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {cat.scripts.map(s => (
-              <div class="group rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-sm transition-all flex flex-col">
+              <div class="group rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-sm transition-all flex flex-col" data-community-cmd={s.communityCmd || ''} data-enhanced-cmd={`bash <(curl -fsSL https://raw.githubusercontent.com/marx1117/vpseval/main/scripts/${s.file})`}>
                 <div class="flex items-center justify-between gap-2 mb-2">
                   <span class="text-xs px-1.5 py-0.5 rounded-full bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300">{s.level}</span>
                   <span class="text-xs text-gray-400 dark:text-gray-300 flex-shrink-0">{s.time}</span>
                 </div>
                 <h4 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors mb-2">{s.name}</h4>
                 <p class="text-xs text-gray-400 dark:text-gray-300 leading-relaxed mb-2 flex-1">{s.desc}</p>
-                <div class="flex flex-wrap gap-1 mb-3">
+                <div class="flex flex-wrap gap-1 mb-3 features-area">
                   {s.features.map(f => (
-                    <span class="text-xs text-gray-400">✓ {f}</span>
+                    <span class="feature-base text-xs text-gray-400">✓ {f}</span>
+                  ))}
+                  {s.enhancedFeatures && s.enhancedFeatures.map(f => (
+                    <span class="feature-enhanced text-xs text-gray-400">✓ {f}</span>
                   ))}
                 </div>
                 <div class="relative mb-3">
-                  <pre class="text-xs font-mono bg-gray-900 text-green-400 p-2 pr-8 rounded-lg overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">bash &lt;(curl -fsSL https://raw.githubusercontent.com/marx1117/vpseval/main/scripts/{s.file})</pre>
-                  <button class="copy-btn absolute top-1.5 right-1.5 p-1 rounded bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition-colors" data-cmd={`bash <(curl -fsSL https://raw.githubusercontent.com/marx1117/vpseval/main/scripts/${s.file})`} title="复制命令">
+                  <pre class="script-cmd text-xs font-mono bg-gray-900 text-green-400 p-2 pr-8 pb-6 rounded-lg overflow-x-auto min-h-[5.5rem] whitespace-pre-wrap break-all leading-relaxed">{`bash <(curl -fsSL https://raw.githubusercontent.com/marx1117/vpseval/main/scripts/${s.file})`}</pre>
+                  <button class="copy-btn absolute top-1.5 right-1.5 p-1 rounded bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition-colors tooltip-btn" data-cmd={`bash <(curl -fsSL https://raw.githubusercontent.com/marx1117/vpseval/main/scripts/${s.file})`} data-tooltip="复制命令">
                     <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                     </svg>
                   </button>
+                  {s.communityCmd && (
+                    <button class="version-btn absolute bottom-1 right-1.5 p-1 rounded bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition-colors tooltip-btn" data-active="enhanced" data-tooltip="切换到社区原版">
+                      <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -123,10 +158,6 @@ const backendTools = [
         </div>
       ))}
     </div>
-
-    <div class="p-5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-center">
-      <p class="text-sm text-gray-500 dark:text-gray-300">更多工具持续添加中。有需要的功能？用首页 AI 向导告诉我们。</p>
-    </div>
   </div>
 </BaseLayout>
 
@@ -141,6 +172,32 @@ const backendTools = [
         btn.innerHTML = '<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
         setTimeout(() => { btn.innerHTML = orig; }, 1500);
       } catch { /* silent */ }
+    });
+  });
+
+  // ---- 版本切换按钮 ----
+  document.querySelectorAll('.version-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.group');
+      const pre = card.querySelector('.script-cmd');
+      const copyBtn = card.querySelector('.copy-btn');
+      const communityCmd = card.dataset.communityCmd || '';
+      const enhancedCmd = card.dataset.enhancedCmd || '';
+      const isEnhanced = btn.dataset.active === 'enhanced';
+
+      if (isEnhanced) {
+        pre.textContent = communityCmd;
+        copyBtn.dataset.cmd = communityCmd;
+        btn.dataset.active = 'community';
+        btn.dataset.tooltip = '切换到机鉴增强版';
+        card.querySelectorAll('.feature-enhanced').forEach(el => el.classList.add('hidden'));
+      } else {
+        pre.textContent = enhancedCmd;
+        copyBtn.dataset.cmd = enhancedCmd;
+        btn.dataset.active = 'enhanced';
+        btn.dataset.tooltip = '切换到社区原版';
+        card.querySelectorAll('.feature-enhanced').forEach(el => el.classList.remove('hidden'));
+      }
     });
   });
 </script>

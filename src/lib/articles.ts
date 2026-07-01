@@ -2705,6 +2705,204 @@ docker system prune -a -f</code></pre>
 </ol>
 <p>这 5 个问题能解释 80% 的故障。</p>`,
   },
+
+  // DMIT 选购参考：高端 CN2 GIA 线路，延迟极低
+  {
+    slug: 'dmit-overview',
+    title: 'DMIT 选购参考：高端 CN2 GIA 线路，延迟极低',
+    category: '商家测评',
+    level: '入门',
+    time: '5 min',
+    summary: 'DMIT 主打高端 CN2 GIA 和 CMIN2 精品线路，覆盖洛杉矶、香港、东京三大核心节点，延迟低、稳定性好，适合对线路质量有较高要求的用户。',
+    content: `<h2>关于 DMIT</h2>
+<p>DMIT 是一家专注于亚太地区精品线路的 VPS 服务商，成立于 2017 年，自有 ASN（AS906/AS54574），在洛杉矶、香港、东京拥有自营机房。其核心卖点是<strong>CN2 GIA（电信精品线路）和 CMIN2（移动精品线路）</strong>，到中国大陆的延迟和丢包率控制在行业顶级水平。</p>
+<p>官网：<a href="https://dmit.io/" target="_blank" rel="nofollow noopener">https://dmit.io/</a></p>
+<h2>机房与线路</h2><ul><li><strong>美国洛杉矶</strong>：CN2 GIA / CMIN2，电信约 142ms，联通约 151ms，移动约 175ms</li><li><strong>中国香港</strong>：CN2 GIA，电信约 35ms，联通约 40ms，移动约 28ms</li><li><strong>日本东京</strong>：CN2 GIA，电信约 55ms，联通约 62ms，移动约 48ms</li></ul>
+<p>DMIT 提供三个网络等级：Premium（CN2 GIA）、Eyeball（CMIN2/CMI）、Tier 1（标准国际），其中 Premium 系列是面向中国大陆用户的主力产品。</p>
+<h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 20G SSD</td><td>1 TB</td><td>1Gbps</td><td>\$36.90/年</td></tr></table>
+<p>DMIT 价格在 VPS 市场中属于中高端，但考虑到 CN2 GIA 线路的带宽成本，性价比在精品线路中算是合理。</p>
+<h2>优点</h2><ul><li>线路质量行业顶级，CN2 GIA 到中国大陆延迟极低、丢包极少</li><li>自有 ASN 和 IP 资源，非租用线路，稳定性有保障</li><li>洛杉矶、香港、东京三个核心节点覆盖主要亚太市场</li><li>支持支付宝、PayPal 等多种支付方式</li><li>控制面板功能完善，支持快照、备份、防火墙</li></ul>
+<h2>缺点/注意事项</h2><ul><li>价格偏高，入门款 \$36.90/年，不适合预算紧张的用户</li><li>香港和东京节点经常缺货，需关注补货通知</li><li>流量限制偏紧（入门款仅 1TB）</li><li>退款政策较严格</li><li>工单响应速度一般</li></ul>
+<h2>适合人群</h2><p>适合对线路质量有刚性需求的用户：外贸建站、跨境电商、游戏加速、视频会议等需要稳定低延迟连接的场景。<em>（注：本文为基于公开信息的选购参考，非实测测评）</em></p>`,
+  },
+  // BandwagonHost（搬瓦工）选购参考：CN2 GIA 线路标杆
+  {
+    slug: 'bandwagonhost-overview',
+    title: 'BandwagonHost（搬瓦工）选购参考：CN2 GIA 线路标杆',
+    category: '商家测评',
+    level: '入门',
+    time: '5 min',
+    summary: 'BandwagonHost 是中文 VPS 圈知名度最高的服务商之一，以 CN2 GIA 线路和 KiwiVM 面板著称，提供洛杉矶、东京、阿姆斯特丹三大节点。',
+    content: `<h2>关于 BandwagonHost</h2>
+<p>BandwagonHost（中文圈俗称"搬瓦工"）成立于 2012 年，总部位于加拿大，是中文 VPS 用户群体中知名度最高的海外服务商之一。早年以超低价 OpenVZ VPS 闻名，后全面转型 KVM 架构，主打<strong>CN2 GIA、CMIN2、AS9929 三网精品线路</strong>。</p>
+<p>官网：<a href="https://bandwagonhost.com/" target="_blank" rel="nofollow noopener">https://bandwagonhost.com/</a></p>
+<h2>机房与线路</h2><ul><li><strong>美国洛杉矶</strong>：CN2 GIA / CMIN2 / AS9929，三网回程均为精品线路</li><li><strong>日本东京</strong>：软银 + IIJ 混合线路</li><li><strong>荷兰阿姆斯特丹</strong>：CN2 GIA 回程优化</li></ul>
+<p>搬瓦工的核心竞争力在于自研的 KiwiVM 控制面板，支持一键迁移数据中心、实时流量监控、快照备份等功能。</p>
+<h2>套餐与价格</h2><table><tr><th>线路</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>CN2 GIA</td><td>2C 1G 20G SSD</td><td>1 TB</td><td>2.5Gbps</td><td>\$49.99/季</td></tr></table>
+<h2>优点</h2><ul><li>KiwiVM 面板功能强大：一键换 IP、快照、迁移机房、流量统计</li><li>线路稳定，CN2 GIA 到中国大陆丢包率极低</li><li>品牌信誉好，运营超过 10 年，几乎没有跑路风险</li><li>自有机房和 IP 资源，非代理商模式</li><li>经常有节日促销，折扣力度大</li></ul>
+<h2>缺点/注意事项</h2><ul><li>价格偏高，CN2 GIA 线路 \$49.99/季度起步</li><li>流量限制较紧（入门款 1TB/月），超出后降速而非断网</li><li>不提供 24/7 技术支持</li><li>IP 被墙后可付费更换</li></ul>
+<h2>适合人群</h2><p>适合愿意为线路质量付费的用户：科学上网、外贸建站、跨境电商等。<em>（注：本文为基于公开信息的选购参考，非实测测评）</em></p>`,
+  },
+  // RackNerd 选购参考：极致低价的美国 VPS
+  {
+    slug: 'racknerd-overview',
+    title: 'RackNerd 选购参考：极致低价的美国 VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '4 min',
+    summary: 'RackNerd 以超低价格闻名，主营美国多机房 VPS，适合预算有限、对线路要求不高的用户。经常有节日闪购活动。',
+    content: `<h2>关于 RackNerd</h2><p>RackNerd 成立于 2019 年，是一家主打极致低价的美国 VPS 服务商。凭借激进的价格策略（黑五 \$10/年以下套餐）和稳定的服务，迅速在 VPS 圈积累了口碑。KVM 虚拟化，SolusVM 面板。</p><p>官网：<a href="https://my.racknerd.com/" target="_blank" rel="nofollow noopener">https://my.racknerd.com/</a></p><h2>机房与线路</h2><ul><li><strong>美国洛杉矶</strong>：普通国际 BGP，约 168-185ms</li><li><strong>美国达拉斯</strong>：普通国际，约 210ms</li><li><strong>美国芝加哥</strong>：普通国际，约 225ms</li><li><strong>美国纽约</strong>：普通国际，约 240ms</li></ul><p>全部为普通国际线路，无中国方向优化，晚高峰有明显衰减。</p><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 512M 15G SSD</td><td>2 TB</td><td>1Gbps</td><td>\$3/月</td></tr></table><p>黑五期间常有 \$10-15/年的闪购套餐。</p><h2>优点</h2><ul><li>价格极低，适合练手、测试、学习 Linux</li><li>大流量（入门款 2TB/月）</li><li>多个美国机房可选</li><li>支持支付宝付款</li><li>经常有促销活动</li></ul><h2>缺点</h2><ul><li>普通国际线路，晚高峰到中国延迟高、丢包多</li><li>低价套餐性能有限</li><li>SolusVM 面板功能不如 KiwiVM</li><li>换 IP 需付费（\$3/次）</li></ul><h2>适合人群</h2><p>适合预算极其有限的用户：学习 Linux、搭建个人博客、跑轻量脚本。不适合对线路质量有要求的场景。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // Vultr 选购参考：全球 30+ 节点的开发者友好 VPS
+  {
+    slug: 'vultr-overview',
+    title: 'Vultr 选购参考：全球 30+ 节点的开发者友好 VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '4 min',
+    summary: 'Vultr 是老牌云服务商，全球 30+ 数据中心，按小时计费，API 友好，适合开发者和需要全球部署的用户。',
+    content: `<h2>关于 Vultr</h2><p>Vultr 成立于 2014 年，总部位于美国佛罗里达州，是全球知名的云服务商。全球 30+ 数据中心，按小时计费，API 自动化部署，开发者友好。</p><p>官网：<a href="https://www.vultr.com/" target="_blank" rel="nofollow noopener">https://www.vultr.com/</a></p><h2>机房与线路</h2><ul><li><strong>日本东京</strong>：普通国际，联通约 98ms，移动约 82ms</li><li><strong>新加坡</strong>：普通国际，电信约 90ms</li><li><strong>韩国首尔、美国洛杉矶</strong>等 30+ 节点</li></ul><p>全部为普通国际线路，无中国方向优化。但节点数量多，可用性高。</p><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 512M 10G NVMe</td><td>500 GB</td><td>1Gbps</td><td>\$2.50/月</td></tr></table><p>按小时计费，随时可销毁。实际最低 \$6/月。</p><h2>优点</h2><ul><li>全球 30+ 数据中心</li><li>按小时计费，灵活试用</li><li>API 和 Terraform 支持完善</li><li>支持支付宝</li><li>品牌信誉好，上市公司</li></ul><h2>缺点</h2><ul><li>普通国际线路，到中国延迟偏高</li><li>换 IP 需销毁重建</li><li>部分 IP 段可能被标记为机房 IP</li></ul><h2>适合人群</h2><p>适合开发者和企业：API 自动化、CI/CD、全球负载均衡、临时测试环境。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // BuyVM 选购参考：不限流量 + 可附加存储块
+  {
+    slug: 'buyvm-overview',
+    title: 'BuyVM 选购参考：不限流量 + 可附加存储块',
+    category: '商家测评',
+    level: '入门',
+    time: '4 min',
+    summary: 'BuyVM 以不限流量、可附加大容量存储块（$1.25/TB/月）著称，适合 BT/PT 下载和存储型用户。',
+    content: `<h2>关于 BuyVM</h2><p>BuyVM 是 FranTech 旗下的 VPS 品牌，成立于 2010 年，以不限流量和可附加超大容量存储块闻名。数据中心位于拉斯维加斯、皮斯卡特维和卢森堡。</p><p>官网：<a href="https://my.frantech.ca/" target="_blank" rel="nofollow noopener">https://my.frantech.ca/</a></p><h2>机房与线路</h2><ul><li><strong>美国拉斯维加斯</strong>：普通国际，约 195ms</li><li><strong>美国皮斯卡特维</strong>：普通国际，约 235ms</li><li><strong>卢森堡</strong>：普通国际，约 210ms</li></ul><p>全部普通国际线路，无中国方向优化。</p><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 250G HDD</td><td>不限流量</td><td>1Gbps</td><td>\$7/月</td></tr></table><p>存储块（Slab）可单独购买：256GB/\$1.25/月，1TB/\$5/月。</p><h2>优点</h2><ul><li>不限流量</li><li>存储块价格极低（\$5/TB/月）</li><li>运营 10+ 年，信誉可靠</li><li>支持支付宝</li></ul><h2>缺点</h2><ul><li>普通线路，到中国延迟高</li><li>TOS 较严格，BT 需注意版权</li><li>面板功能简单</li></ul><h2>适合人群</h2><p>适合 BT/PT 下载、文件存储、个人网盘等大流量/大存储场景。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // CloudCone 选购参考：按小时计费的洛杉矶 VPS
+  {
+    slug: 'cloudcone-overview',
+    title: 'CloudCone 选购参考：按小时计费的洛杉矶 VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'CloudCone 主打按小时计费和灵活升降级，仅有洛杉矶一个机房，适合短期测试和轻量应用。',
+    content: `<h2>关于 CloudCone</h2><p>CloudCone 是一家以灵活计费著称的 VPS 服务商，仅提供美国洛杉矶 Multacom 机房的 VPS。支持按小时计费、随时销毁退款。</p><p>官网：<a href="https://app.cloudcone.com/" target="_blank" rel="nofollow noopener">https://app.cloudcone.com/</a></p><h2>机房与线路</h2><ul><li><strong>美国洛杉矶</strong>：普通国际 BGP，约 170ms</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 14G SSD</td><td>1 TB</td><td>1Gbps</td><td>\$2.00/月</td></tr></table><h2>优点</h2><ul><li>按小时计费，灵活</li><li>控制面板功能全面</li><li>价格低廉</li><li>支持支付宝</li></ul><h2>缺点</h2><ul><li>仅一个机房</li><li>普通线路</li><li>换 IP 只能销毁重建</li></ul><h2>适合人群</h2><p>适合短期测试、临时项目的用户。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // V.PS 选购参考：三网精品线路的亚太 VPS
+  {
+    slug: 'vps-overview',
+    title: 'V.PS 选购参考：三网精品线路的亚太 VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '4 min',
+    summary: 'V.PS 主打 CN2 GIA、AS9929、CMI 三网精品线路，覆盖东京、香港、新加坡、伦敦，性价比突出。',
+    content: `<h2>关于 V.PS</h2><p>V.PS（原名 VPS.RE）是一家主打亚太精品线路的 VPS 服务商，以 CN2 GIA、AS9929、CMI 三网优化线路为核心卖点，覆盖东京、香港、新加坡、伦敦四个核心节点。</p><p>官网：<a href="https://v.ps/" target="_blank" rel="nofollow noopener">https://v.ps/</a></p><h2>机房与线路</h2><ul><li><strong>日本东京</strong>：CN2 GIA / AS9929 / CMI 三网精品</li><li><strong>中国香港</strong>：CN2 GIA / CMI</li><li><strong>新加坡</strong>：CN2 GIA / CMI</li><li><strong>英国伦敦</strong>：CN2 GIA</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 20G NVMe</td><td>1 TB</td><td>1Gbps</td><td>\$5.99/月</td></tr></table><h2>优点</h2><ul><li>三网精品线路</li><li>东京节点对移动和联通友好</li><li>NVMe 存储</li></ul><h2>缺点</h2><ul><li>香港和东京节点经常缺货</li><li>品牌知名度不如老牌</li></ul><h2>适合人群</h2><p>适合需要三网优化线路的用户：科学上网、跨境电商等。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // GigsGigs 选购参考：老牌亚太精品线路服务商
+  {
+    slug: 'gigsgigs-overview',
+    title: 'GigsGigs 选购参考：老牌亚太精品线路服务商',
+    category: '商家测评',
+    level: '入门',
+    time: '4 min',
+    summary: 'GigsGigs 是运营多年的老牌 VPS 服务商，主打 CN2 GIA、CMI、AS9929 三条精品线路，覆盖香港、东京、新加坡、洛杉矶。',
+    content: `<h2>关于 GigsGigs</h2><p>GigsGigs 成立于 2015 年，总部位于马来西亚，以亚太精品线路为主要卖点。覆盖香港、东京、新加坡、洛杉矶四个节点，均提供三网精品线路。</p><p>官网：<a href="https://gigsgigscloud.com/" target="_blank" rel="nofollow noopener">https://gigsgigscloud.com/</a></p><h2>机房与线路</h2><ul><li><strong>中国香港</strong>：CN2 GIA / CMI / AS9929，三网<40ms</li><li><strong>日本东京</strong>：CN2 GIA / CMI / AS9929</li><li><strong>新加坡</strong>：CN2 GIA / CMI</li><li><strong>美国洛杉矶</strong>：CN2 GIA / CMI / AS9929</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 512M 20G SSD</td><td>1 TB</td><td>1Gbps</td><td>\$12/月</td></tr></table><h2>优点</h2><ul><li>老牌服务商，运营稳定</li><li>三网精品线路完整</li><li>香港节点延迟极低</li></ul><h2>缺点</h2><ul><li>价格偏高，\$12/月起</li><li>库存有限</li></ul><h2>适合人群</h2><p>适合预算充足、对线路质量要求高的用户。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // CloudSilk（白丝云）选购参考：AS9929 优化线路入门选择
+  {
+    slug: 'cloudsilk-overview',
+    title: 'CloudSilk（白丝云）选购参考：AS9929 优化线路入门选择',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'CloudSilk（白丝云）主打美国圣何塞的 AS9929 联通精品线路，价格低廉，适合联通用户入门体验精品线路。',
+    content: `<h2>关于 CloudSilk</h2><p>CloudSilk（白丝云）主打联通 AS9929 精品线路，仅提供美国圣何塞机房，以低价和 AS9929 优化线路为核心卖点。</p><p>官网：<a href="https://cloudsilk.io/" target="_blank" rel="nofollow noopener">https://cloudsilk.io/</a></p><h2>机房与线路</h2><ul><li><strong>美国圣何塞</strong>：AS9929 联通精品线路</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 512M 10G SSD</td><td>500 GB</td><td>500Mbps</td><td>\$3/月</td></tr></table><h2>优点</h2><ul><li>价格低廉（\$3/月起）</li><li>AS9929 联通精品线路</li></ul><h2>缺点</h2><ul><li>仅一个机房</li><li>主要优化联通，电信和移动一般</li></ul><h2>适合人群</h2><p>适合联通用户体验精品线路。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // ColoCrossing 选购参考：大带宽美国 VPS
+  {
+    slug: 'colocrossing-overview',
+    title: 'ColoCrossing 选购参考：大带宽美国 VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'ColoCrossing 提供美国洛杉矶的大带宽 VPS（20TB/月），适合流量密集型应用，价格适中。',
+    content: `<h2>关于 ColoCrossing</h2><p>ColoCrossing 是美国老牌数据中心运营商，同时对外提供 VPS 服务。拥有自营洛杉矶机房，以超大带宽（20TB/月）为主要卖点。</p><p>官网：<a href="https://cloud.colocrossing.com/" target="_blank" rel="nofollow noopener">https://cloud.colocrossing.com/</a></p><h2>机房与线路</h2><ul><li><strong>美国洛杉矶</strong>：普通国际 BGP，约 168ms</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 25G SSD</td><td>20 TB</td><td>1Gbps</td><td>\$4/月</td></tr></table><h2>优点</h2><ul><li>超大流量 20TB/月</li><li>自营机房，基础设施可靠</li></ul><h2>缺点</h2><ul><li>普通线路，到中国延迟高</li><li>仅一个机房</li></ul><h2>适合人群</h2><p>适合大流量下载、转码、备份。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // DigitalOcean 选购参考：全球部署的开发者云平台
+  {
+    slug: 'digitalocean-overview',
+    title: 'DigitalOcean 选购参考：全球部署的开发者云平台',
+    category: '商家测评',
+    level: '入门',
+    time: '4 min',
+    summary: 'DigitalOcean 是全球知名的云计算平台，提供全球多地 VPS，以文档完善、API 友好、社区活跃著称。',
+    content: `<h2>关于 DigitalOcean</h2><p>DigitalOcean 成立于 2011 年，2021 年上市，是全球最知名的云计算平台之一。以简单易用、文档完善和开发者友好著称。</p><p>官网：<a href="https://www.digitalocean.com/" target="_blank" rel="nofollow noopener">https://www.digitalocean.com/</a></p><h2>机房与线路</h2><ul><li><strong>新加坡</strong>：普通国际，约 90ms</li><li><strong>伦敦 / 法兰克福 / 阿姆斯特丹 / 纽约 / 班加罗尔</strong>：普通国际</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 512M 10G NVMe</td><td>500 GB</td><td>1Gbps</td><td>\$4/月</td></tr></table><h2>优点</h2><ul><li>文档和教程非常完善</li><li>API 和 CLI 强大</li><li>上市公司，信誉好</li><li>产品线齐全</li></ul><h2>缺点</h2><ul><li>普通线路，到中国一般</li><li>不支持支付宝</li></ul><h2>适合人群</h2><p>适合开发者：Web 应用、API 后端、微服务。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // HostDare 选购参考：美西 CN2 GIA 入门选择
+  {
+    slug: 'hostdare-overview',
+    title: 'HostDare 选购参考：美西 CN2 GIA 入门选择',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'HostDare 主打美国洛杉矶 CN2 GIA 线路，以入门级价格提供精品线路，适合预算有限的用户体验 CN2 GIA。',
+    content: `<h2>关于 HostDare</h2><p>HostDare 主打美西 CN2 GIA 线路，仅提供美国洛杉矶机房，以相对较低的价格体验 CN2 GIA 精品线路。</p><p>官网：<a href="https://hostdare.com/" target="_blank" rel="nofollow noopener">https://hostdare.com/</a></p><h2>机房与线路</h2><ul><li><strong>美国洛杉矶</strong>：CN2 GIA</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 756M 35G HDD</td><td>500 GB</td><td>50Mbps</td><td>\$55.99/年</td></tr></table><h2>优点</h2><ul><li>CN2 GIA 入门价格较低</li><li>年付套餐性价比高</li></ul><h2>缺点</h2><ul><li>带宽仅 50Mbps</li><li>HDD 硬盘</li><li>仅一个机房</li></ul><h2>适合人群</h2><p>适合预算有限但想体验 CN2 GIA 的用户。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // HostHatch 选购参考：全球多节点 NVMe VPS
+  {
+    slug: 'hosthatch-overview',
+    title: 'HostHatch 选购参考：全球多节点 NVMe VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '4 min',
+    summary: 'HostHatch 提供全球多地 NVMe 高性能 VPS，覆盖阿姆斯特丹、洛杉矶、斯德哥尔摩、东京。',
+    content: `<h2>关于 HostHatch</h2><p>HostHatch 成立于 2011 年，以全球多节点和 NVMe 存储为主要卖点，覆盖阿姆斯特丹、洛杉矶、斯德哥尔摩、东京。</p><p>官网：<a href="https://cloud.hosthatch.com/" target="_blank" rel="nofollow noopener">https://cloud.hosthatch.com/</a></p><h2>机房与线路</h2><ul><li><strong>荷兰阿姆斯特丹</strong>：普通国际，约 180ms</li><li><strong>美国洛杉矶</strong>：普通国际，约 168ms</li><li><strong>瑞典斯德哥尔摩</strong>：普通国际，约 200ms</li><li><strong>日本东京</strong>：普通国际，约 108ms</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 2G 10G NVMe</td><td>1 TB</td><td>1Gbps</td><td>\$4/月</td></tr></table><h2>优点</h2><ul><li>全球多地可选</li><li>NVMe 高性能</li><li>入门款 2G 内存</li><li>运营 10+ 年</li></ul><h2>缺点</h2><ul><li>普通线路</li><li>存储空间偏小</li></ul><h2>适合人群</h2><p>适合多地域部署：Web 应用、数据库、开发测试。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // LisaHost（丽萨主机）选购参考：香港/东京 CN2 GIA 精品 VPS
+  {
+    slug: 'lisa-overview',
+    title: 'LisaHost（丽萨主机）选购参考：香港/东京 CN2 GIA 精品 VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'LisaHost（丽萨主机）主打香港和东京的 CN2 GIA 精品线路，NVMe 存储，适合对延迟要求极高的用户。',
+    content: `<h2>关于 LisaHost</h2><p>LisaHost（丽萨主机）主打香港和东京 CN2 GIA/CMI 精品线路，NVMe 高性能存储。</p><p>官网：<a href="https://lisahost.com/" target="_blank" rel="nofollow noopener">https://lisahost.com/</a></p><h2>机房与线路</h2><ul><li><strong>中国香港</strong>：CN2 GIA / CMI，延迟 20-40ms</li><li><strong>日本东京</strong>：CN2 GIA / CMI</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 15G NVMe</td><td>1 TB</td><td>1Gbps</td><td>\$4.99/月</td></tr></table><h2>优点</h2><ul><li>香港/东京双精品节点</li><li>NVMe 存储</li><li>延迟极低</li></ul><h2>缺点</h2><ul><li>品牌知名度较低</li></ul><h2>适合人群</h2><p>适合需要极低延迟的用户：游戏加速、企业远程办公。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // VirMach 选购参考：极致低价的练手 VPS
+  {
+    slug: 'virmach-overview',
+    title: 'VirMach 选购参考：极致低价的练手 VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'VirMach 以极端低价（$1/月起）闻名，适合零基础练手和学习 Linux，但性能和稳定性较差。',
+    content: `<h2>关于 VirMach</h2><p>VirMach 是美国极端低价 VPS 服务商，最低配仅 \$1/月（256M 内存）。黑五常有神价促销。</p><p>官网：<a href="https://billing.virmach.com/" target="_blank" rel="nofollow noopener">https://billing.virmach.com/</a></p><h2>机房与线路</h2><ul><li>洛杉矶、达拉斯、芝加哥、凤凰城、阿姆斯特丹</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 256M 10G SSD</td><td>500 GB</td><td>1Gbps</td><td>\$1.00/月</td></tr></table><h2>优点</h2><ul><li>价格极低，练手成本几乎为零</li><li>支持支付宝</li></ul><h2>缺点</h2><ul><li>性能和稳定性差，超售严重</li><li>TOS 严格</li><li>工单响应极慢</li><li>晚高峰几乎不可用</li></ul><h2>适合人群</h2><p>仅适合零基础新手练习 Linux。不建议用于任何生产环境。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // WebHorizon 选购参考：全球多节点 NVMe VPS
+  {
+    slug: 'webhorizon-overview',
+    title: 'WebHorizon 选购参考：全球多节点 NVMe VPS',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'WebHorizon 提供新加坡、东京、伦敦等地的 NVMe VPS，也有低价 NAT VPS 可选。',
+    content: `<h2>关于 WebHorizon</h2><p>WebHorizon 提供全球多节点 VPS，位于新加坡、东京、伦敦、阿姆斯特丹、纽约。以 NVMe 存储和 NAT VPS 为特色。</p><p>官网：<a href="https://webhorizon.in/" target="_blank" rel="nofollow noopener">https://webhorizon.in/</a></p><h2>机房与线路</h2><ul><li>新加坡、东京、伦敦、阿姆斯特丹、纽约</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 20G NVMe</td><td>2 TB</td><td>1Gbps</td><td>\$3.99/月</td></tr></table><h2>优点</h2><ul><li>全球多节点</li><li>NVMe 存储</li><li>NAT VPS 价格更低</li></ul><h2>缺点</h2><ul><li>普通线路</li><li>品牌规模较小</li></ul><h2>适合人群</h2><p>适合轻量 Web 应用、开发测试。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // YxVM 选购参考：亚太 CMI 优化线路
+  {
+    slug: 'yxvm-overview',
+    title: 'YxVM 选购参考：亚太 CMI 优化线路',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'YxVM 主打香港、东京、新加坡的 CMI 优化线路，以较低价格提供移动优化的亚太 VPS。',
+    content: `<h2>关于 YxVM</h2><p>YxVM 主打亚太 CMI 优化线路，覆盖香港、东京、新加坡，以移动线路优化为主要特色。</p><p>官网：<a href="https://yxvm.com/" target="_blank" rel="nofollow noopener">https://yxvm.com/</a></p><h2>机房与线路</h2><ul><li><strong>中国香港</strong>：CMI / 优化线路</li><li><strong>日本东京</strong>：CMI / 优化线路</li><li><strong>新加坡</strong>：CMI / 优化线路</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 15G SSD</td><td>1 TB</td><td>1Gbps</td><td>\$3.50/月</td></tr></table><h2>优点</h2><ul><li>CMI 线路对移动用户友好</li><li>亚太三节点</li></ul><h2>缺点</h2><ul><li>电信和联通线路一般</li><li>品牌较小</li></ul><h2>适合人群</h2><p>适合移动用户寻找低价亚太优化线路。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
+  // ZgoVPS 选购参考：美西 CN2 GIA + AS4837 双线路
+  {
+    slug: 'zgovps-overview',
+    title: 'ZgoVPS 选购参考：美西 CN2 GIA + AS4837 双线路',
+    category: '商家测评',
+    level: '入门',
+    time: '3 min',
+    summary: 'ZgoVPS 提供美国洛杉矶和西雅图的 VPS，主打 CN2 GIA 和 AS4837 双线路，NVMe 存储。',
+    content: `<h2>关于 ZgoVPS</h2><p>ZgoVPS 主打美西 CN2 GIA 和 AS4837 双线路，提供洛杉矶和西雅图两个机房，NVMe 高性能存储。</p><p>官网：<a href="https://zgovps.com/" target="_blank" rel="nofollow noopener">https://zgovps.com/</a></p><h2>机房与线路</h2><ul><li><strong>美国洛杉矶</strong>：CN2 GIA / AS4837</li><li><strong>美国西雅图</strong>：CN2 GIA / AS4837</li></ul><h2>套餐与价格</h2><table><tr><th>套餐</th><th>配置</th><th>流量</th><th>带宽</th><th>价格</th></tr><tr><td>入门款</td><td>1C 1G 20G NVMe</td><td>1 TB</td><td>1Gbps</td><td>\$4.99/月</td></tr></table><h2>优点</h2><ul><li>CN2 GIA + AS4837 双线路</li><li>NVMe 存储</li></ul><h2>缺点</h2><ul><li>品牌较小</li><li>移动线路一般</li></ul><h2>适合人群</h2><p>适合电信和联通用户寻找美西精品线路。<em>（注：基于公开信息的选购参考）</em></p>`,
+  },
 ];
 
 // Helper: get article by slug

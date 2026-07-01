@@ -29,14 +29,14 @@ export const knowledgeBase: KnowledgeItem[] = [
     category: '线路',
   },
   {
-    key: '9929',
+    key: 'AS9929',
     name: 'AS9929',
     brief: '中国联通精品线路（原网通 A 网），媲美 CN2 GIA 的联通顶级线路',
     ipRange: '10099.x.x',
     category: '线路',
   },
   {
-    key: '4837',
+    key: 'AS4837',
     name: 'AS4837',
     brief: '中国联通普通国际线路，晚高峰略有衰减，日常使用尚可',
     ipRange: '219.158.x.x',

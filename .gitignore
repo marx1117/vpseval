@@ -3,7 +3,6 @@ Thumbs.db
 *.log
 node_modules/
 dist/
-docs/
 .wrangler/
 .env
 .workbuddy/
@@ -11,6 +10,13 @@ docs/
 .astro/
 .uploads/
 
+# Changelog 单页：玩票性质，含内部过程信息，不对外发布
+changelog.html
+
 # RAG 生成的中间文件，可随时重新生成
 scripts/articles.json
 scripts/vectors.ndjson
+
+# 测评模板和原始数据，内部使用，不对外发布
+docs/
+public/reviews/
